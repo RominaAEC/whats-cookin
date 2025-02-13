@@ -3,11 +3,11 @@ What’s Cookin’
 
 ## Overview
 
-What's Cookin' is designed to help users decide what to cook based on the ingredients they already have in their pantry. Users can input their pantry items and receive recipe suggestions, while also add their favorite recipes to a personal cookbook wheter that is creating their own recipe or adding one from the suggested ones. 
+What's Cookin' is designed to help users decide what to cook based on the ingredients they already have in their pantry. Users can input their pantry items and receive recipe suggestions, while also adding their favorite recipes to a personal cookbook wheter that is creating their own recipe or adding one from the suggested ones. 
 
 ### Problem
 
-People often find themselves staring at their fridge or pantry without knowing what to cook. They may forget about their own recipes or struggle to come up with meal ideas based on limited ingredients. What’s Cookin’ helps them by providing instant recipe suggestions, giving users list of dishes they can make with what they already have. The app also serves as a digital cookbook where users can add recipes from the suggestions or add their own. What's Cookin aims to solve the common issue of not knowing what to cook, while also allowing users to save and manage their favorite meals.
+People often find themselves staring at their fridge or pantry without knowing what to cook. They may forget about their own recipes or struggle to come up with meal ideas based on limited ingredients. What’s Cookin’ helps them by providing instant recipe suggestions, and giving users a list of dishes they can make with what they already have. The app also serves as a digital cookbook where users can add recipes from the suggestions or add their own. What's Cookin aims to solve the common issue of not knowing what to cook, while also allowing users to save and manage their favorite meals.
 
 ### User Profile
 
@@ -26,11 +26,11 @@ People often find themselves staring at their fridge or pantry without knowing w
 
 1. Input Pantry Items:
 
-As a user, I want to be able to input the ingredients I have in my pantry, so that I can get recipe suggestions based on what I already have available.
+As a user, I want to be able to input the ingredients I have in my pantry so that I can get recipe suggestions based on what I already have available.
 
 2. Recipe Suggestions:
 
-As a user, I want the app to provide me with a list of recipes that I can make using the ingredients I’ve entered, so that I can quickly find meal options without having to search through countless recipes.
+As a user, I want the app to provide me with a list of recipes that I can make using the ingredients I’ve entered so that I can quickly find meal options without having to search through countless recipes.
 
 3. Add Custom Recipes:
 
@@ -41,18 +41,17 @@ As a user, I want to be able to add my own recipes to my cookbook, so that I can
 As a user, I want to be able to search for recipes in my cookbook, so that I can quickly find the recipe I want without scrolling through all of them.
 
 5. Manage Recipes: 
-As a user, I want to be able to save recipes that I like to my personal cookbook, so that I can easily access and make them again in the future.
+As a user, I want to be able to save recipes that I like to my personal cookbook so that I can easily access and make them again in the future.
 
 As a user, I want to be able to add my own recipes to my cookbook, so that I can store all my favorite dishes in one place and have them available for future use.
 
-As a user, I want to be able to edit or delete recipies from my personal cookbook. 
+As a user, I want to be able to edit or delete recipes from my personal cookbook. 
 
 ## Implementation
 
 ### Tech Stack
 
 - React
-- MySQL
 - Client libraries: 
     - react
     - react-router
@@ -68,16 +67,16 @@ As a user, I want to be able to edit or delete recipies from my personal cookboo
 ### Sitemap
 
 - Homepage: A simple dashboard to input pantry ingredients and view suggested recipes.
-- Individual recipe page: A detail view of the recipe that includes ingredients and  
+- Individual recipe page: A detailed view of the recipe that includes ingredients and  
 - cookbook: Page to view saved recipes.
 - Add Recipe: Interface to allow users to add their own recipes.
-- Eddit Recipe: Interface to allow users to edit reciped from their recipee book
+- Edit Recipe: Interface to allow users to edit recipes from their recipe book
 
 ### Mockups
 - https://www.figma.com/design/3VwSbBeuNw8PWR3Zhv0Icu/Mockups?node-id=0-1&t=mh9XjD3I5FBM5TgJ-1
 ### Data
 
-A json file will be used for the cookbook API in the first MVP, and later as more features are implemented a database will be required. 
+A JSON file will be used for the cookbook API in the first MVP, and later as more features are implemented a database will be required. 
 
 ### Endpoints
 #### JSON file for user's personal  cookbook
@@ -173,7 +172,7 @@ Response:
 ]
 ```
 **DELETE /recipes/:id**
-- Deletes a recipe from the api by its ID.
+- Deletes a recipe from the API by its ID.
 
 Parameters:
 - id: Recipe ID to be deleted.
@@ -187,7 +186,7 @@ Parameters:
 - Create server
     - express project with routing, with placeholder
 
-- Gather recipes for users personal recipee book
+- Gather recipes for users' personal recipe book
 
 - Create UI elements with hardcoded values for styling   
 	- Navigation bar
@@ -195,12 +194,12 @@ Parameters:
 		- Feature: search recipes by ingredients will display suggested recipes
 		- Feature: save a recipe in the personal cookbook
 	- cookbook page 
-		- Feature:View a list of personal recipies or recipies added from the suggested recipes
+		- Feature: View a list of personal recipes or recipes added from the suggested recipes
 		- Feature: Delete a recipe from the cookbook. 
 	- Add cookbook 
 		- Feature: Add a new recipe to the cookbook
 	- Edit cookbook 
-		- Feature: Edit a recipe to the cookbook
+		- Feature: Edit a recipe for the cookbook
 
 - Create backend APIs for personal cookbook. 
 	- GET
