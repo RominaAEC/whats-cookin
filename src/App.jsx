@@ -7,11 +7,13 @@ import CookbookPage from "./pages/CookbookPage/CookbookPage";
 import AddRecipePage from "./pages/AddRecipePage/AddRecipePage";
 import CookbookSingleRecipePage from "./pages/CookbookSingleRecipePage/CookbookSingleRecipePage";
 import EditRecipePage from "./pages/EditRecipePage/EditRecipePage";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <NavBar/>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/search-results" element={<RecipeSearchPage/>}/>
