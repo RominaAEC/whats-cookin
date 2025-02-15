@@ -14,7 +14,7 @@ function App() {
     <>
       <BrowserRouter>
         <NavBar/>
-        <Routes>
+          <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/search-results" element={<RecipeSearchPage/>}/>
           <Route path="/search-results/:id" element={<SingleRecipeSearchPage/>}/>

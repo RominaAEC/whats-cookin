@@ -5,9 +5,12 @@ import SearchByIngredients from "../../components/SearchByIngredients/SearchByIn
 export default function HomePage() {
   return (
     <section className="home">
-      <img className="home__image" src={PotIcon} alt="cooking pot icon"/>
-      <h1 className="home">Got ingredients? Let's cook up something tasty!</h1>
-      <SearchByIngredients/>
+      <article className="home__container">
+        <img className="home__image" src={PotIcon} alt="cooking pot icon"/>
+      <h1 className="home__title">Got ingredients? <br/>Let's make something tasty!</h1>
+      <SearchByIngredients className="home__search"/>
+      </article>
+      
     </section>
   )
 };
