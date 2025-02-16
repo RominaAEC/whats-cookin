@@ -9,6 +9,7 @@ import CarrotIcon from "../../assets/icons/ph_carrot-thin.svg?react";
 import BowlIcon from "../../assets/icons/arcticons_recipe-keeper.svg?react";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
 import EditIcon from "../../assets/icons/edit.svg?react";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 
 export default function CookbookSingleRecipePage() {
@@ -32,8 +33,44 @@ export default function CookbookSingleRecipePage() {
         }
     }, [recipeId]);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
+  
+    const openModal = (item) => {
+      setSelectedItem(item);
+      setIsModalOpen(true);
+      console.log("hello");
+    };
+  
+    const closeModal = () => {
+      setSelectedItem(null);
+      setIsModalOpen(false);
+    };
+
+    const deleteInventoryItem = () => {
+      alert("recipe deleted");
+    };
+
+    useEffect(() => {
+      if (isModalOpen) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "";
+      }
+  
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }, [isModalOpen]);
+
     return (
         <section className="single-recipe">
+          <DeleteModal
+              modalTag={selectedItem ? recipe.name : ""}
+              isOpen={isModalOpen}
+              onClose={closeModal}
+              onAction={deleteInventoryItem}
+            />
             {recipe && (
                 <article className="single-recipe__container">
                     <div className="single-recipe__navbar">
@@ -65,7 +102,7 @@ export default function CookbookSingleRecipePage() {
                                 <h2 className="single-recipe__title">{recipe.name}</h2>
                             </div>
                             <div className="single-recipe__button-container">
-                                <button className="single-recipe__cookbook-button single-recipe__cookbook-button--delete">
+                                <button onClick={() => openModal(recipe.id)} className="single-recipe__cookbook-button single-recipe__cookbook-button--delete">
                                   <DeleteIcon className="single-recipe__header-icon single-recipe__header-icon--delete" />
                                 </button>
                                 <Link to= {`/cookbook/${recipe.id}/edit`}>
