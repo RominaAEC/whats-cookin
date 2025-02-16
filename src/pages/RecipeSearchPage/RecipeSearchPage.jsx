@@ -6,7 +6,7 @@ import SearchRecipeCard from "../../components/SearchRecipeCard/SearchRecipeCard
 export default function RecipeSearchPage() {
   const [recipes, setRecipes] = useState([]); // State to store recipes data
 
-  const getRecipes = async () => {
+  const getRecipes = async (id) => {
     try {
       const response = await axios.get('https://dummyjson.com/recipes')
       console.log(response.data);
