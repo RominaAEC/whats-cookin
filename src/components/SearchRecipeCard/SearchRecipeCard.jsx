@@ -1,27 +1,7 @@
 import "./SearchRecipeCard.scss";
-import { useState, useEffect } from 'react';
-import axios from "axios";
 import { Link } from "react-router-dom";
 
-
-export default function SearchRecipeCard() {
-
-    const [recipes, setRecipes] = useState([]) //store recipes data
-
-    const getRecipes = async () => {
-        try{
-            const response = await axios.get('https://dummyjson.com/recipes')
-            console.log(response.data);
-            setRecipes(response.data.recipes);
-        } catch(error){
-            console.error("Error fetching recipes", error);
-        }
-    }
-
-    useEffect(() => {
-        getRecipes();
-    }, []);
-
+export default function SearchRecipeCard({ recipes, basePath }) {
   return (
     <ul className="result-recipe">
         {recipes.map((recipe) => (
@@ -29,6 +9,7 @@ export default function SearchRecipeCard() {
                 key={recipe.id}
                 className="result-recipe__container"
             >
+                 <Link to={`${basePath}/${recipe.id}`}>
                 <img className="result-recipe__image" src={recipe.image} alt={recipe.name}/>
                 <div className="result-recipe__wrapper">
                     <h4 className="result-recipe__title">{recipe.name}</h4>
@@ -45,10 +26,10 @@ export default function SearchRecipeCard() {
                         <p className="result-recipe__content p1">{recipe.servings}</p>
                     </div>
                 </div>
+                </Link>
             </li>
         )
-    )}
-        
+    )}  
     </ul>
   )
 }
