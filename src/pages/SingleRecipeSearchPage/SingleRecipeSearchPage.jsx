@@ -28,15 +28,15 @@ export default function SingleRecipeSearchPage() {
 
     return (
         <section className="single-recipe">
-          {recipe && (
-            <article className="single-recipe__container">
-                <div className="single-recipe__navbar">
+            {recipe && (
+                <article className="single-recipe__container">
+                    <div className="single-recipe__navbar">
                         <Link to="/search-results">
-                                <button className="single-recipe__navbar-button">
-                                    <BackIcon className="single-recipe__navbar-icon" />
-                                </button>
-                            </Link>
-                      <article className="single-recipe__navbar-button-container">
+                            <button className="single-recipe__navbar-button">
+                                <BackIcon className="single-recipe__navbar-icon" />
+                            </button>
+                        </Link>
+                        <article className="single-recipe__navbar-button-container">
                             <Link to="/">
                                 <button className="single-recipe__navbar-button">
                                     <SearchIcon className="single-recipe__navbar-icon" />
@@ -47,15 +47,18 @@ export default function SingleRecipeSearchPage() {
                                     <BookIcon className="single-recipe__navbar-icon" />
                                 </button>
                             </Link>
-                            </article>
+                        </article>
                     </div>
-               <div className="single-recipe__image-container">
-            <img className="single-recipe__image" src={recipe.image} alt={recipe.name} />
-            <div className="single-recipe__image-overlay"></div>
-          </div>
-            <p>{recipe.name}</p> 
-            </article>
-          )}
+                    <div className="single-recipe__image-container">
+                        <img className="single-recipe__image" src={recipe.image} alt={recipe.name} />
+                        <div className="single-recipe__image-overlay"></div>
+                    </div>
+                    <div className="single-recipe__card">
+                        <h2>{recipe.name}</h2>
+                    </div>
+                    
+                </article>
+            )}
         </section>
     );
 }
