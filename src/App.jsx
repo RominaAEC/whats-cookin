@@ -20,8 +20,8 @@ function App() {
           <Route path="/search-results/:recipeId" element={<SingleRecipeSearchPage/>}/>
           <Route path="/cookbook" element={<CookbookPage/>}/>
           <Route path="/cookbook/add-recipe" element={<AddRecipePage/>}/>
-          <Route path="/cookbook/:id" element={<CookbookSingleRecipePage/>}/>
-          <Route path="/cookbook/:id/edit" element={<EditRecipePage/>}/>
+          <Route path="/cookbook/:recipeId" element={<CookbookSingleRecipePage/>}/>
+          <Route path="/cookbook/:recipeId/edit" element={<EditRecipePage/>}/>
         </Routes>
       </BrowserRouter>
     </>
