@@ -1,0 +1,37 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.cookbook{
+    margin: 0 $margin-mobile 1.5rem $margin-mobile;
+
+    &__header{
+        display: flex;
+        gap:0.5rem;
+        align-items: center;
+        padding-bottom: 1rem;
+    }
+
+    &__header-icon{
+        width: 2.25rem;
+        height: 2.25rem;
+        fill: $black;
+    }
+
+    &__button{
+        display: flex;
+        gap:0.5rem;
+        align-items: center;
+        height: $elementHeight-mobile;
+        width:100%;
+        border-radius: 1.25rem;
+        justify-content: center;
+        border: none;
+        background-color: $evergreen;
+        color: $white;
+        margin-top: 1rem;
+    }
+
+    &__button-icon{
+        fill: $white;
+    }
+}

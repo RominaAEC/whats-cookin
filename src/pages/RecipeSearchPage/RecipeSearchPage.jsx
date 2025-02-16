@@ -33,16 +33,16 @@ export default function RecipeSearchPage() {
 
   return (
     <section className="recipe-search">
-      <form className="search-ingredients">
+      <form className="recipe-search__form">
         <input
           type="text"
-          className={`search-ingredients__input ${searchState === "active" ? "search-ingredients__input--active" : ""
+          className={`recipe-search__input ${searchState === "active" ? "recipe-search__input--active" : ""
             }`}
           placeholder="Your ingredients..."
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
-        <button type="submit" className="search-ingredients__button">
+        <button type="submit" className="recipe-search__button">
           Find me a recipe
         </button>
       </form>

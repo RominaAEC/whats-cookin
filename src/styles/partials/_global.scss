@@ -9,12 +9,12 @@ html {
 * {
   box-sizing: inherit;
   margin: 0;
+  padding:0;
 }
 
 body {
   font-family: "Open Sans", serif;
   background-color: $background;
-  margin: 1.5rem $margin-mobile;
 }
 
 a {

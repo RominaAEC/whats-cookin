@@ -17,7 +17,7 @@ function App() {
           <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/search-results" element={<RecipeSearchPage/>}/>
-          <Route path="/search-results/:id" element={<SingleRecipeSearchPage/>}/>
+          <Route path="/search-results/:recipeId" element={<SingleRecipeSearchPage/>}/>
           <Route path="/cookbook" element={<CookbookPage/>}/>
           <Route path="/cookbook/add-recipe" element={<AddRecipePage/>}/>
           <Route path="/cookbook/:id" element={<CookbookSingleRecipePage/>}/>
