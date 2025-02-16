@@ -1,0 +1,22 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.add-recipe{
+    margin: 0 $margin-mobile 1.5rem $margin-mobile;
+
+    &__header{
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    &__button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__icon{
+        width:1.25rem;
+        height:1.25rem;
+    }
+}
