@@ -3,7 +3,6 @@
 
 .single-recipe{
     width:100%;
-    position: absolute;
 
     &__navbar{
         width:100%;
@@ -31,7 +30,7 @@
         align-items: center;
     }
 
-    &__navbar-button-icon{
+    &__navbar-icon{
         width:1.25rem;
         height:1.25rem;
     }
@@ -63,7 +62,96 @@
       }
 
       &__card{
-        margin:0$margin-mobile;
+        position: relative;
+        margin:0 $margin-mobile;
+        background-color: $white;
+        padding: 1.5rem 1rem 0.5rem 1rem;
+        margin-top:-5.5rem;
+        margin-bottom: 1.5rem;
+        z-index: 10;
+        border-radius: 1rem;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+      }
+
+      &__header{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid $gray-evergreen;
+      }
+
+      &__title-container{
+        display: flex;
+        height: 3rem;
+        align-items: center;
+      }
+
+      &__title{
+        color: $evergreen;
+      }
+
+      &__header-button{
+        width: 2.25rem;
+        height: $elementHeight-mobile;
+        border-radius: 2rem;
+        border:none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $evergreen;
+        flex-shrink: 0;
+      }
+
+      &__header-icon{
+        width:1.25rem;
+        height: 1.25rem;
+        fill: $white;
+      }
+
+      &__ingredients-container{
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1rem;
+      }
+
+      &__ingredients-header{
+        display: flex;
+        align-items: center;
+        gap:0.25rem;
+      }
+
+      &__ingredients-icon{
+        width:1.5rem;
+        height: 1.5rem;
+      }
+
+      &__ingredients-label{
+        color: $evergreen;
+      }
+
+      &__time-container{
+       min-width: 4rem;
+      }
+      &__time{
+        display: flex;
+        gap:0.25rem;
+      }
+
+      &__label{
+        color: $evergreen;
+        font-weight: 600;
+      }
+
+      &__list{
+        padding-left: 1.5rem;
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+      }
+
+      &__list-item{
+        list-style:circle;
       }
 }
 
