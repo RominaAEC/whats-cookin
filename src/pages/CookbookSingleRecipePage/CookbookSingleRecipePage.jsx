@@ -47,8 +47,18 @@ export default function CookbookSingleRecipePage() {
       setIsModalOpen(false);
     };
 
-    const deleteInventoryItem = () => {
-      alert("recipe deleted");
+    const deleteRecipe = () => {
+      if (selectedItem){
+        axios
+        .delete(`http://localhost:8080/recipes/${selectedItem}`)
+        .then(() => {
+            window.location.href = "/cookbook"
+        })
+        .catch((error) =>{
+            console.error("Error deleting item:", error);
+            alert("Failed to delete item.");
+        })
+      }
     };
 
     useEffect(() => {
@@ -69,7 +79,7 @@ export default function CookbookSingleRecipePage() {
               modalTag={selectedItem ? recipe.name : ""}
               isOpen={isModalOpen}
               onClose={closeModal}
-              onAction={deleteInventoryItem}
+              onAction={deleteRecipe}
             />
             {recipe && (
                 <article className="single-recipe__container">
