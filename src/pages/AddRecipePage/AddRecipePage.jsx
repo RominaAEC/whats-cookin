@@ -1,5 +1,5 @@
 import "./AddRecipePage.scss";
-import AddRecipe from "../../components/AddRecipe/AddRecipe";
+import RecipeForm from "../../components/RecipeForm/RecipeForm";
 import BackIcon from "../../assets/icons/arrow-back.svg?react";
 import { Link, useNavigate  } from "react-router-dom";
 import axios from "axios";
@@ -59,7 +59,7 @@ export default function AddRecipePage() {
         </Link>
         <h2>Add a new recipe</h2>
       </article>
-      <AddRecipe
+      <RecipeForm
         onSubmit={handleSubmit}
         formData={formData}
         setFormData={setFormData}

@@ -1,4 +1,4 @@
-import "./AddRecipe.scss";
+import "./RecipeForm.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
