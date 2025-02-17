@@ -1,2 +1,53 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
+
+.recipe-form{
+    margin-top: 1.5rem;
+
+    &__wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__label{
+        font-size: 1rem;
+        line-height: 1.25rem;
+        font-weight: 600;
+    }
+
+    &__input{
+        height: $elementHeight-mobile;
+        border-radius: 1.25rem;
+        padding-left: 1rem;
+        border: 1px solid $gray-evergreen;
+        margin: 0.5rem 0rem;
+        width:100%;
+    }
+
+    &__input-group{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap:1rem;
+    }
+
+    &__button-small{
+        border: none;
+        border-radius: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        background-color: $evergreen-opacity;
+        width: 2.25rem;
+        height:2.25rem;
+
+        
+
+    }
+
+    &__icon{
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+}

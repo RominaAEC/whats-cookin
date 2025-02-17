@@ -38,22 +38,19 @@ export default function AddRecipe({ onSubmit }) {
             </div>
             <div className="recipe-form__wrapper">
                 <label className="recipe-form__label">Prep Time</label>
-                <input type="number" placeholder="prep time" className="recipe-form__input" />
+                <input type="number" placeholder="Prep time" className="recipe-form__input" />
             </div>
             <div className="recipe-form__wrapper">
                 <label className="recipe-form__label">Cook Time</label>
-                <input type="number" placeholder="cook time" className="recipe-form__input" />
+                <input type="number" placeholder="Cook time" className="recipe-form__input" />
             </div>
             <div className="recipe-form__wrapper">
                 <label className="recipe-form__label">Servings</label>
-                <input type="number" placeholder="cook time" className="recipe-form__input" />
+                <input type="number" placeholder="Servings" className="recipe-form__input" />
             </div>
 
-            <div>
-                <label className="recipe-form__label">Ingredients:</label>
-                <button type="button" onClick={addIngredient} className="recipe-form__button">
-                    <AddIcon />
-                </button>
+            <div className="recipe-form__wrapper">
+                <label className="recipe-form__label">Ingredients</label>
                 <div className="recipe-form__input-container">
                     {ingredients.map((ingredient, index) => (
                         <div key={index} className="recipe-form__input-group">
@@ -68,21 +65,22 @@ export default function AddRecipe({ onSubmit }) {
                                 <button
                                     type="button"
                                     onClick={() => removeIngredient(index)}
-                                    className="recipe-form__button recipe-form__button--remove"
+                                    className="recipe-form__button-small"
                                 >
-                                    <DeleteIcon />
+                                    <DeleteIcon className="recipe-form__icon"/>
                                 </button>
                             )}
                         </div>
                     ))}
+                    <button type="button" onClick={addIngredient} className="recipe-form__button">
+                        <AddIcon className="recipe-form__icon"/>
+                    </button>
                 </div>
             </div>
 
-            <div>
-                <label className="recipe-form__label">Instructions</label>
-                <button type="button" onClick={addInstruction} className="recipe-form__button">
-                    <AddIcon />
-                </button>
+            <div className="recipe-form__wrapper">
+                    <label className="recipe-form__label">Instructions</label>
+                    
                 <div className="recipe-form__input-container">
                     {instructions.map((instruction, index) => (
                         <div key={index} className="recipe-form__input-group">
@@ -97,25 +95,28 @@ export default function AddRecipe({ onSubmit }) {
                                 <button
                                     type="button"
                                     onClick={() => removeInstruction(index)}
-                                    className="recipe-form__button recipe-form__button--remove"
+                                    className="recipe-form__button-small"
                                 >
-                                    <DeleteIcon />
+                                    <DeleteIcon className="recipe-form__icon"/>
                                 </button>
                             )}
                         </div>
                     ))}
+                    <button type="button" onClick={addInstruction} className="recipe-form__button">
+                        <AddIcon className="recipe-form__icon"/>
+                    </button>
                 </div>
             </div>
-            <div> 
-                 <button type="button" className="recipe-form__button recipe-form__button--cancel">
-                Cancel
-            </button>
+            <div>
+                <button type="button" className="recipe-form__button recipe-form__button--cancel">
+                    Cancel
+                </button>
 
-            <button type="submit" className="recipe-form__button recipe-form__button--submit">
-                Submit Recipe
-            </button>
+                <button type="submit" className="recipe-form__button recipe-form__button--submit">
+                    Add Recipe
+                </button>
             </div>
-           
+
         </form>
     );
 }
