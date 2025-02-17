@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 export default function EditRecipePage() {
   const { recipeId } = useParams();
   const navigate = useNavigate();
+  const redirectRoute = `/cookbook/${recipeId}`;
 
   // Define the initial form data
   const initialFormData = {
@@ -65,7 +66,7 @@ export default function EditRecipePage() {
       });
       console.log("Recipe updated successfully:", response.data);
       // Redirect to the /cookbook route
-      navigate("/cookbook");
+      navigate(redirectRoute);
     } catch (error) {
       console.error("Error updating recipe:", error);
     }
@@ -83,6 +84,8 @@ export default function EditRecipePage() {
         onSubmit={handleSubmit}
         formData={formData}
         setFormData={setFormData}
+        onCancel={redirectRoute}
+        formLabel="Edit recipe"
       />
     </section>
   )

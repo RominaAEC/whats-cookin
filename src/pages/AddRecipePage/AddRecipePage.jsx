@@ -21,6 +21,7 @@ export default function AddRecipePage() {
   const [formData, setFormData] = useState(initialFormData); 
 
   const navigate = useNavigate();
+  const redirectRoute = "/cookbook";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +45,7 @@ export default function AddRecipePage() {
       // Reset the form data to initial values
       setFormData(initialFormData);
       // Redirect to the /cookbook route
-      navigate("/cookbook");
+      navigate(redirectRoute);
 
     }catch (error){
       console.error("Error adding recipe:", error)
@@ -63,6 +64,8 @@ export default function AddRecipePage() {
         onSubmit={handleSubmit}
         formData={formData}
         setFormData={setFormData}
+        onCancel={redirectRoute}
+        formLabel="Add recipe"
       />
     </section>
   )

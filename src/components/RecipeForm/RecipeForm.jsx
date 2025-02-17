@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
 import AddIcon from "../../assets/icons/add.svg?react";
 
-export default function AddRecipe({ onSubmit, formData, setFormData }) {
+export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, formLabel}) {
     const [focusedInput, setFocusedInput] = useState(null);
 
     // Function to update a specific field in formData
@@ -175,12 +175,12 @@ export default function AddRecipe({ onSubmit, formData, setFormData }) {
                 </div>
             </div>
             <div className="recipe-form__action-buttons">
-                <Link to="/cookbook" className="recipe-form__button recipe-form__button--cancel">
+                <Link to={onCancel} className="recipe-form__button recipe-form__button--cancel">
                     Cancel
                 </Link>
 
                 <button type="submit" className="recipe-form__button recipe-form__button--submit">
-                    Add recipe
+                    {formLabel}
                 </button>
             </div>
         </form>
