@@ -1,13 +1,14 @@
 import "./AddRecipePage.scss";
 import AddRecipe from "../../components/AddRecipe/AddRecipe";
 import BackIcon from "../../assets/icons/arrow-back.svg?react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
 
 export default function AddRecipePage() {
 
+  // Define the initial form data
   const initialFormData = {
     name: "",
     prepTimeMinutes: "",
@@ -18,6 +19,8 @@ export default function AddRecipePage() {
   };
 
   const [formData, setFormData] = useState(initialFormData); 
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,10 +40,12 @@ export default function AddRecipePage() {
           "Content-Type": "application/json",
         }
       });
-
       console.log("Recipe added successfully:", response.data);
       // Reset the form data to initial values
       setFormData(initialFormData);
+      // Redirect to the /cookbook route
+      navigate("/cookbook");
+
     }catch (error){
       console.error("Error adding recipe:", error)
     }

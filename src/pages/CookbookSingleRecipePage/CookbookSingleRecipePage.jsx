@@ -1,7 +1,7 @@
 import "./CookbookSingleRecipePage.scss"
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import SearchIcon from "../../assets/icons/search.svg?react";
 import BookIcon from "../../assets/icons/book.svg?react";
 import BackIcon from "../../assets/icons/arrow-back.svg?react";
@@ -35,6 +35,7 @@ export default function CookbookSingleRecipePage() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const navigate = useNavigate();
   
     const openModal = (item) => {
       setSelectedItem(item);
@@ -52,7 +53,7 @@ export default function CookbookSingleRecipePage() {
         axios
         .delete(`http://localhost:8080/recipes/${selectedItem}`)
         .then(() => {
-            window.location.href = "/cookbook"
+            navigate("/cookbook");
         })
         .catch((error) =>{
             console.error("Error deleting item:", error);
