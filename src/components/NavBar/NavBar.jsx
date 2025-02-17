@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 
 export default function NavBar() {
     const location = useLocation();
+    const pathname = location.pathname;
 
     // State to keep track of window width
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -26,8 +27,10 @@ export default function NavBar() {
         };
     }, []);
 
-    // Regex to match specific routes like /search-results/:id and /cookbook/:id
-    const isSpecialPage = /^\/search-results\/[^/]+$/.test(location.pathname) || /^\/cookbook\/[^/]+$/.test(location.pathname);
+    // Regex to match specific routes /search-results/:recipeId and /cookbook/:recipeId
+    const isSpecialPage = 
+    /^\/search-results\/[^/]+$/.test(pathname) || 
+    /^\/cookbook\/\d+$/.test(pathname);
 
     // Conditionally add 'navbar--hide' class for mobile special pages
     const navbarClass = isSpecialPage && isMobile ? "navbar navbar--hide" : "navbar";

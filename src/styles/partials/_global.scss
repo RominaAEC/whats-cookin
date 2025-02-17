@@ -62,6 +62,8 @@ button, a{
   font-family: "Open Sans", serif;
   font-size:0.875rem;
   line-height: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
 
   @include tablet{
     font-size:1rem;
