@@ -4,33 +4,45 @@ import { Link } from "react-router-dom";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
 import AddIcon from "../../assets/icons/add.svg?react";
 
-export default function AddRecipe({ onSubmit }) {
-    const [ingredients, setIngredients] = useState(["", "", ""]); // Default 3 inputs
-    const [instructions, setInstructions] = useState(["", "", ""]);
+export default function AddRecipe({ onSubmit, formData, setFormData }) {
     const [focusedInput, setFocusedInput] = useState(null);
 
-    const addIngredient = () => setIngredients([...ingredients, ""]);
+    // Function to update a specific field in formData
+    const handleChange = (field, value) => {
+        setFormData((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
+
+    // Add or remove ingredients
+    const addIngredient = () => {
+        setFormData((prev) => ({
+            ...prev,
+            ingredients: [...prev.ingredients, ""],
+        }));
+    };
+
     const removeIngredient = (index) => {
-        setIngredients(ingredients.filter((_, i) => i !== index));
+        setFormData((prev) => ({
+            ...prev,
+            ingredients: prev.ingredients.filter((_, i) => i !== index),
+        }));
     };
 
-    const addInstruction = () => setInstructions([...instructions, ""]);
+    // Add or remove instructions
+    const addInstruction = () => {
+        setFormData((prev) => ({
+            ...prev,
+            instructions: [...prev.instructions, ""],
+        }));
+    };
+
     const removeInstruction = (index) => {
-        setInstructions(instructions.filter((_, i) => i !== index));
-    };
-
-    // Function to update ingredient value
-    const handleIngredientChange = (index, value) => {
-        const updatedIngredients = [...ingredients];
-        updatedIngredients[index] = value;
-        setIngredients(updatedIngredients);
-    };
-
-    // Function to update instruction value
-    const handleInstructionChange = (index, value) => {
-        const updatedInstructions = [...instructions];
-        updatedInstructions[index] = value;
-        setInstructions(updatedInstructions);
+        setFormData((prev) => ({
+            ...prev,
+            instructions: prev.instructions.filter((_, i) => i !== index),
+        }));
     };
 
     // Handle focus and blur events
@@ -49,17 +61,22 @@ export default function AddRecipe({ onSubmit }) {
                 <input
                     type="text"
                     placeholder="Recipe name"
-                    className={`recipe-form__input ${focusedInput === "recipeName" ? "recipe-form__input--active" : ""}`}
-                    onFocus={() => handleFocus("recipeName")}
-                    onBlur={handleBlur} />
+                    value={formData.name}
+                    onChange={(e) => handleChange("name", e.target.value)} 
+                    className={`recipe-form__input ${focusedInput === "name" ? "recipe-form__input--active" : ""}`}
+                    onFocus={() => handleFocus("name")}
+                    onBlur={handleBlur}
+                />
             </div>
             <div className="recipe-form__wrapper">
                 <label className="recipe-form__label">Prep Time</label>
                 <input
                     type="text"
                     placeholder="Prep time"
-                    className={`recipe-form__input ${focusedInput === "prepTime" ? "recipe-form__input--active" : ""}`}
-                    onFocus={() => handleFocus("prepTime")}
+                    value={formData.prepTimeMinutes}
+                    onChange={(e) => handleChange("prepTimeMinutes", e.target.value)}
+                    className={`recipe-form__input ${focusedInput === "prepTimeMinutes" ? "recipe-form__input--active" : ""}`}
+                    onFocus={() => handleFocus("prepTimeMinutes")}
                     onBlur={handleBlur} />
             </div>
             <div className="recipe-form__wrapper">
@@ -67,8 +84,10 @@ export default function AddRecipe({ onSubmit }) {
                 <input
                     type="text"
                     placeholder="Cook time"
-                    className={`recipe-form__input ${focusedInput === "cookTime" ? "recipe-form__input--active" : ""}`}
-                    onFocus={() => handleFocus("cookTime")}
+                    value={formData.cookTimeMinutes}
+                    onChange={(e) => handleChange("cookTimeMinutes", e.target.value)}
+                    className={`recipe-form__input ${focusedInput === "cookTimeMinutes" ? "recipe-form__input--active" : ""}`}
+                    onFocus={() => handleFocus("cookTimeMinutes")}
                     onBlur={handleBlur} />
             </div>
             <div className="recipe-form__wrapper">
@@ -76,6 +95,8 @@ export default function AddRecipe({ onSubmit }) {
                 <input
                     type="text"
                     placeholder="Servings"
+                    value={formData.servings}
+                    onChange={(e) => handleChange("servings", e.target.value)}
                     className={`recipe-form__input ${focusedInput === "servings" ? "recipe-form__input--active" : ""}`}
                     onFocus={() => handleFocus("servings")}
                     onBlur={handleBlur} />
@@ -84,18 +105,22 @@ export default function AddRecipe({ onSubmit }) {
             <div className="recipe-form__wrapper">
                 <label className="recipe-form__label">Ingredients</label>
                 <div className="recipe-form__input-container">
-                    {ingredients.map((ingredient, index) => (
+                    {formData.ingredients.map((ingredient, index) => (
                         <div key={index} className="recipe-form__input-group">
                             <input
                                 type="text"
                                 value={ingredient}
-                                onChange={(e) => handleIngredientChange(index, e.target.value)}
+                                onChange={(e) => {
+                                    const updatedIngredients = [...formData.ingredients];
+                                    updatedIngredients[index] = e.target.value;
+                                    handleChange("ingredients", updatedIngredients);
+                                }}
                                 placeholder={`Ingredient ${index + 1}`}
                                 className={`recipe-form__input ${focusedInput === `ingredient-${index}` ? "recipe-form__input--active" : ""}`}
                                 onFocus={() => handleFocus(`ingredient-${index}`)}
                                 onBlur={handleBlur}
                             />
-                            {ingredients.length > 1 && (
+                            {formData.ingredients.length > 1 && (
                                 <button
                                     type="button"
                                     onClick={() => removeIngredient(index)}
@@ -117,18 +142,22 @@ export default function AddRecipe({ onSubmit }) {
                 <label className="recipe-form__label">Instructions</label>
 
                 <div className="recipe-form__input-container">
-                    {instructions.map((instruction, index) => (
+                    {formData.instructions.map((instruction, index) => (
                         <div key={index} className="recipe-form__input-group">
                             <input
                                 type="text"
                                 value={instruction}
-                                onChange={(e) => handleInstructionChange(index, e.target.value)}
+                                onChange={(e) => {
+                                    const updatedInstructions = [...formData.instructions];
+                                    updatedInstructions[index] = e.target.value;
+                                    handleChange("instructions", updatedInstructions);
+                                }}
                                 placeholder={`Instruction ${index + 1}`}
                                 className={`recipe-form__input ${focusedInput === `instruction-${index}` ? "recipe-form__input--active" : ""}`}
                                 onFocus={() => handleFocus(`instruction-${index}`)}
                                 onBlur={handleBlur}
                             />
-                            {instructions.length > 1 && (
+                            {formData.instructions.length > 1 && (
                                 <button
                                     type="button"
                                     onClick={() => removeInstruction(index)}

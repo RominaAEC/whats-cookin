@@ -19,7 +19,7 @@ export default function CookbookSingleRecipePage() {
 
     const getRecipeById = async (id) => {
         try {
-            const response = await axios.get(`https://dummyjson.com/recipes/${id}`);
+            const response = await axios.get(`http://localhost:8080/recipes/${id}`);
             console.log(response.data);
             setRecipe(response.data); // Set the recipe data directly
         } catch (error) {
