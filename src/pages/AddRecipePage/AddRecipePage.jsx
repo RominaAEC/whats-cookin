@@ -1,7 +1,7 @@
 import "./AddRecipePage.scss";
 import RecipeForm from "../../components/RecipeForm/RecipeForm";
 import BackIcon from "../../assets/icons/arrow-back.svg?react";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
@@ -14,46 +14,46 @@ export default function AddRecipePage() {
     prepTimeMinutes: "",
     cookTimeMinutes: "",
     servings: "",
-    ingredients: ["", "", ""], // Start with one empty ingredient
-    instructions: ["", "", ""], // Start with one empty instruction
+    ingredients: ["", "", ""], // Start with three empty ingredients
+    instructions: ["", "", ""], // Start with three empty instructions
   };
 
-  const [formData, setFormData] = useState(initialFormData); 
+  const [formData, setFormData] = useState(initialFormData);
   const [validation, setValidation] = useState({});
 
   const navigate = useNavigate();
   const redirectRoute = "/cookbook";
 
   const validateForm = () => {
-    const missingField = {}; 
+    const missingField = {};
 
-    if (!formData.name.trim()){
+    if (!formData.name.trim()) {
       missingField.name = "Recipe name is required"
     }
-    if (!formData.prepTimeMinutes.trim()){
+    if (!formData.prepTimeMinutes.trim()) {
       missingField.prepTimeMinutes = "Prep Time is required"
     }
-    if (!formData.cookTimeMinutes.trim()){
+    if (!formData.cookTimeMinutes.trim()) {
       missingField.cookTimeMinutes = "Cook Time is required"
     }
-    if (!formData.servings.trim()){
+    if (!formData.servings.trim()) {
       missingField.servings = "Servings is required"
     }
 
-    const ingredientsValidation = formData. ingredients.map((ingredient, index) => 
+    const ingredientsValidation = formData.ingredients.map((ingredient, index) =>
       !ingredient.trim() ? `Ingredient ${index + 1} is required` : null
-    ); 
+    );
     if (ingredientsValidation.some((error) => error !== null)) {
       missingField.ingredients = ingredientsValidation;
     }
 
-    const instructionValidation = formData. instructions.map((instruction, index) => 
+    const instructionValidation = formData.instructions.map((instruction, index) =>
       !instruction.trim() ? `Instruction ${index + 1} is required` : null
-    ); 
+    );
     if (instructionValidation.some((error) => error !== null)) {
       missingField.instructions = instructionValidation;
     }
-    
+
     setValidation(missingField);
     return Object.keys(missingField).length === 0;
   }
@@ -64,7 +64,7 @@ export default function AddRecipePage() {
     if (!validateForm()) {
       return;
     }
-    
+
     const recipeData = {
       name: formData.name,
       prepTimeMinutes: parseInt(formData.prepTimeMinutes, 10),
@@ -74,7 +74,7 @@ export default function AddRecipePage() {
       instructions: formData.instructions.filter((instruction) => instruction.trim() !== ""),
     };
 
-    try{
+    try {
       const response = await axios.post('http://localhost:8080/recipes', recipeData, {
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +86,7 @@ export default function AddRecipePage() {
       // Redirect to the /cookbook route
       navigate(redirectRoute);
 
-    }catch (error){
+    } catch (error) {
       console.error("Error adding recipe:", error)
     }
   };
@@ -95,7 +95,7 @@ export default function AddRecipePage() {
     <section className="add-recipe">
       <article className="add-recipe__header">
         <Link to="/cookbook" className="add-recipe__button">
-          <BackIcon className="add-recipe__icon"/>
+          <BackIcon className="add-recipe__icon" />
         </Link>
         <h2>Add a new recipe</h2>
       </article>
