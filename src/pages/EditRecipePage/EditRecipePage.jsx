@@ -64,14 +64,14 @@ export default function EditRecipePage() {
     }
 
     const ingredientsValidation = formData. ingredients.map((ingredient, index) => 
-      !ingredient.trim() ? `Ingredient ${index + 1} is required` : null
+      !ingredient.trim() ? `Ingredient ${index + 1} is missing` : null
     ); 
     if (ingredientsValidation.some((error) => error !== null)) {
       missingField.ingredients = ingredientsValidation;
     }
 
     const instructionValidation = formData. instructions.map((instruction, index) => 
-      !instruction.trim() ? `Instruction ${index + 1} is required` : null
+      !instruction.trim() ? `Instruction ${index + 1} is missing` : null
     ); 
     if (instructionValidation.some((error) => error !== null)) {
       missingField.instructions = instructionValidation;
@@ -103,9 +103,9 @@ export default function EditRecipePage() {
           "Content-Type": "application/json",
         },
       });
-      console.log("Recipe updated successfully:", response.data);
-      // Redirect to the /cookbook route
-      navigate(redirectRoute);
+      // console.log("Recipe updated successfully:", response.data);
+      
+      navigate(redirectRoute); // Redirect to the /cookbook route
     } catch (error) {
       console.error("Error updating recipe:", error);
     }
@@ -124,7 +124,7 @@ export default function EditRecipePage() {
         formData={formData}
         setFormData={setFormData}
         onCancel={redirectRoute}
-        formLabel="Edit recipe"
+        formLabel="Save changes"
         validation={validation}
         setValidation={setValidation}
       />

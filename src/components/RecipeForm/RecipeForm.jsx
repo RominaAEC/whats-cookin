@@ -87,7 +87,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                 <label className="recipe-form__label">Prep Time</label>
                 <input
                     type="text"
-                    placeholder="e.g 15"
+                    placeholder="E.g. 15 min"
                     value={formData.prepTimeMinutes}
                     onChange={(e) => handleChange("prepTimeMinutes", e.target.value)}
                     className=
@@ -109,7 +109,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                 <label className="recipe-form__label">Cook Time</label>
                 <input
                     type="text"
-                    placeholder="e.g. 20"
+                    placeholder="E.g. 20 min"
                     value={formData.cookTimeMinutes}
                     onChange={(e) => handleChange("cookTimeMinutes", e.target.value)}
                     className=
@@ -131,7 +131,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                 <label className="recipe-form__label">Servings</label>
                 <input
                     type="text"
-                    placeholder="e.g. 2"
+                    placeholder="E.g. 2"
                     value={formData.servings}
                     onChange={(e) => handleChange("servings", e.target.value)}
                     className=
