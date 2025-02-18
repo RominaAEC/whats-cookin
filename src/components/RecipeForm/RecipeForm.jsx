@@ -5,7 +5,7 @@ import DeleteIcon from "../../assets/icons/delete.svg?react";
 import AddIcon from "../../assets/icons/add.svg?react";
 import ErrorIcon from "../../assets/icons/error.svg?react";
 
-export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, formLabel, validation, setValidation}) {
+export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, formLabel, validation, setValidation }) {
     const [focusedInput, setFocusedInput] = useState(null);
 
     // Update a specific field in formData
@@ -64,16 +64,16 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     type="text"
                     placeholder="Recipe name"
                     value={formData.name}
-                    onChange={(e) => handleChange("name", e.target.value)} 
+                    onChange={(e) => handleChange("name", e.target.value)}
                     className=
-                        {`recipe-form__input 
+                    {`recipe-form__input 
                         ${focusedInput === "name" ? "recipe-form__input--active" : ""} 
                         ${validation.name ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("name")}
                     onBlur={handleBlur}
                 />
-                {validation.name && <div className="recipe-form__error-container"> 
-                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                {validation.name && <div className="recipe-form__error-container">
+                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
                     <p className="recipe-form__error-message">{validation.name}</p>
                 </div>}
             </div>
@@ -85,14 +85,14 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     value={formData.prepTimeMinutes}
                     onChange={(e) => handleChange("prepTimeMinutes", e.target.value)}
                     className=
-                        {`recipe-form__input 
+                    {`recipe-form__input 
                         ${focusedInput === "prepTimeMinutes" ? "recipe-form__input--active" : ""} 
                         ${validation.prepTimeMinutes ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("prepTimeMinutes")}
-                    onBlur={handleBlur} 
-                    />
-                {validation.prepTimeMinutes && <div className="recipe-form__error-container"> 
-                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                    onBlur={handleBlur}
+                />
+                {validation.prepTimeMinutes && <div className="recipe-form__error-container">
+                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
                     <p className="recipe-form__error-message">{validation.prepTimeMinutes}</p>
                 </div>}
             </div>
@@ -104,14 +104,14 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     value={formData.cookTimeMinutes}
                     onChange={(e) => handleChange("cookTimeMinutes", e.target.value)}
                     className=
-                        {`recipe-form__input 
+                    {`recipe-form__input 
                         ${focusedInput === "cookTimeMinutes" ? "recipe-form__input--active" : ""}
                         ${validation.cookTimeMinutes ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("cookTimeMinutes")}
-                    onBlur={handleBlur} 
+                    onBlur={handleBlur}
                 />
-                {validation.cookTimeMinutes && <div className="recipe-form__error-container"> 
-                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                {validation.cookTimeMinutes && <div className="recipe-form__error-container">
+                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
                     <p className="recipe-form__error-message">{validation.cookTimeMinutes}</p>
                 </div>}
             </div>
@@ -123,14 +123,14 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     value={formData.servings}
                     onChange={(e) => handleChange("servings", e.target.value)}
                     className=
-                        {`recipe-form__input 
+                    {`recipe-form__input 
                         ${focusedInput === "servings" ? "recipe-form__input--active" : ""}
                         ${validation.servings ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("servings")}
-                    onBlur={handleBlur} 
+                    onBlur={handleBlur}
                 />
-                {validation.servings && <div className="recipe-form__error-container"> 
-                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                {validation.servings && <div className="recipe-form__error-container">
+                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
                     <p className="recipe-form__error-message">{validation.servings}</p>
                 </div>}
             </div>
@@ -140,7 +140,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                 <div className="recipe-form__input-container">
                     {formData.ingredients.map((ingredient, index) => (
                         <div key={index} className="recipe-form__input-group">
-                            <div className="recipe-form__input-individual"> 
+                            <div className="recipe-form__input-individual">
                                 <input
                                     type="text"
                                     value={ingredient}
@@ -157,12 +157,12 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                                     onFocus={() => {
                                         handleFocus(`ingredient-${index}`);
                                         setValidation((prev) => ({
-                                          ...prev,
-                                          ingredients: prev.ingredients?.map((error, i) =>
-                                            i === index ? null : error
-                                          ),
+                                            ...prev,
+                                            ingredients: prev.ingredients?.map((error, i) =>
+                                                i === index ? null : error
+                                            ),
                                         }));
-                                      }}
+                                    }}
                                     onBlur={handleBlur}
                                 />
                                 {formData.ingredients.length > 1 && (
@@ -175,8 +175,8 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                                     </button>
                                 )}
                             </div>
-                            {validation.ingredients?.[index] && <div className="recipe-form__error-container"> 
-                                 <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                            {validation.ingredients?.[index] && <div className="recipe-form__error-container">
+                                <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
                                 <p className="recipe-form__error-message">{validation.ingredients[index]}</p>
                             </div>}
                         </div>
@@ -194,43 +194,43 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                 <div className="recipe-form__input-container">
                     {formData.instructions.map((instruction, index) => (
                         <div key={index} className="recipe-form__input-group">
-                            <div className="recipe-form__input-individual"> 
-                            <input
-                                type="text"
-                                value={instruction}
-                                onChange={(e) => {
-                                    const updatedInstructions = [...formData.instructions];
-                                    updatedInstructions[index] = e.target.value;
-                                    handleChange("instructions", updatedInstructions);
-                                }}
-                                placeholder={`Instruction ${index + 1}`}
-                                className=
-                                {`recipe-form__input 
+                            <div className="recipe-form__input-individual">
+                                <input
+                                    type="text"
+                                    value={instruction}
+                                    onChange={(e) => {
+                                        const updatedInstructions = [...formData.instructions];
+                                        updatedInstructions[index] = e.target.value;
+                                        handleChange("instructions", updatedInstructions);
+                                    }}
+                                    placeholder={`Instruction ${index + 1}`}
+                                    className=
+                                    {`recipe-form__input 
                                 ${focusedInput === `instruction-${index}` ? "recipe-form__input--active" : ""}
                                 ${validation.instructions?.[index] ? "recipe-form__input--error" : ""}`}
-                                onFocus={() => {
-                                    handleFocus(`instruction-${index}`);
-                                    setValidation((prev) => ({
-                                      ...prev,
-                                      instructions: prev.instructions?.map((error, i) =>
-                                        i === index ? null : error
-                                      ),
-                                    }));
-                                  }}
-                                onBlur={handleBlur}
-                            />
-                            {formData.instructions.length > 1 && (
-                                <button
-                                    type="button"
-                                    onClick={() => removeInstruction(index)}
-                                    className="recipe-form__button-small"
-                                >
-                                    <DeleteIcon className="recipe-form__icon" />
-                                </button>
-                            )}
+                                    onFocus={() => {
+                                        handleFocus(`instruction-${index}`);
+                                        setValidation((prev) => ({
+                                            ...prev,
+                                            instructions: prev.instructions?.map((error, i) =>
+                                                i === index ? null : error
+                                            ),
+                                        }));
+                                    }}
+                                    onBlur={handleBlur}
+                                />
+                                {formData.instructions.length > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => removeInstruction(index)}
+                                        className="recipe-form__button-small"
+                                    >
+                                        <DeleteIcon className="recipe-form__icon" />
+                                    </button>
+                                )}
                             </div>
-                            {validation.instructions?.[index] && <div className="recipe-form__error-container"> 
-                                 <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                            {validation.instructions?.[index] && <div className="recipe-form__error-container">
+                                <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
                                 <p className="recipe-form__error-message">{validation.instructions[index]}</p>
                             </div>}
                         </div>

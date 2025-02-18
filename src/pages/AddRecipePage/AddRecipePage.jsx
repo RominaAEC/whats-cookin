@@ -19,12 +19,51 @@ export default function AddRecipePage() {
   };
 
   const [formData, setFormData] = useState(initialFormData); 
+  const [validation, setValidation] = useState({});
 
   const navigate = useNavigate();
   const redirectRoute = "/cookbook";
 
+  const validateForm = () => {
+    const missingField = {}; 
+
+    if (!formData.name.trim()){
+      missingField.name = "Recipe name is required"
+    }
+    if (!formData.prepTimeMinutes.trim()){
+      missingField.prepTimeMinutes = "Prep Time is required"
+    }
+    if (!formData.cookTimeMinutes.trim()){
+      missingField.cookTimeMinutes = "Cook Time is required"
+    }
+    if (!formData.servings.trim()){
+      missingField.servings = "Servings is required"
+    }
+
+    const ingredientsValidation = formData. ingredients.map((ingredient, index) => 
+      !ingredient.trim() ? `Ingredient ${index + 1} is required` : null
+    ); 
+    if (ingredientsValidation.some((error) => error !== null)) {
+      missingField.ingredients = ingredientsValidation;
+    }
+
+    const instructionValidation = formData. instructions.map((instruction, index) => 
+      !instruction.trim() ? `Instruction ${index + 1} is required` : null
+    ); 
+    if (instructionValidation.some((error) => error !== null)) {
+      missingField.instructions = instructionValidation;
+    }
+    
+    setValidation(missingField);
+    return Object.keys(missingField).length === 0;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
     
     const recipeData = {
       name: formData.name,
@@ -66,6 +105,8 @@ export default function AddRecipePage() {
         setFormData={setFormData}
         onCancel={redirectRoute}
         formLabel="Add recipe"
+        validation={validation}
+        setValidation={setValidation}
       />
     </section>
   )
