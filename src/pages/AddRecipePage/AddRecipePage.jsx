@@ -30,14 +30,23 @@ export default function AddRecipePage() {
     if (!formData.name.trim()) {
       missingField.name = "Recipe name is required"
     }
+
     if (!formData.prepTimeMinutes.trim()) {
       missingField.prepTimeMinutes = "Prep Time is required"
+    } else if (isNaN(formData.prepTimeMinutes)) {
+      missingField.prepTimeMinutes = "Prep Time must be a number";
     }
+
     if (!formData.cookTimeMinutes.trim()) {
       missingField.cookTimeMinutes = "Cook Time is required"
+    } else if (isNaN(formData.cookTimeMinutes)) {
+      missingField.cookTimeMinutes = "Cook Time must be a number";
     }
+
     if (!formData.servings.trim()) {
       missingField.servings = "Servings is required"
+    } else if (isNaN(formData.servings)) {
+      missingField.servings = "Servings must be a number";
     }
 
     const ingredientsValidation = formData.ingredients.map((ingredient, index) =>
@@ -67,9 +76,9 @@ export default function AddRecipePage() {
 
     const recipeData = {
       name: formData.name,
-      prepTimeMinutes: parseInt(formData.prepTimeMinutes, 10),
-      cookTimeMinutes: parseInt(formData.cookTimeMinutes, 10),
-      servings: parseInt(formData.servings, 10),
+      prepTimeMinutes:(formData.prepTimeMinutes),
+      cookTimeMinutes: (formData.cookTimeMinutes),
+      servings: (formData.servings),
       ingredients: formData.ingredients.filter((ingredient) => ingredient.trim() !== ""),
       instructions: formData.instructions.filter((instruction) => instruction.trim() !== ""),
     };
