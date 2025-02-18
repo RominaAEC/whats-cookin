@@ -63,19 +63,20 @@ export default function EditRecipePage() {
       missingField.servings = "Servings is required"
     }
 
-    const instructionValidation = formData. ingredients.map((ingredient, index) => 
+    const ingredientsValidation = formData. ingredients.map((ingredient, index) => 
       !ingredient.trim() ? `Ingredient ${index + 1} is required` : null
     ); 
-    if (instructionValidation.some((error) => error !== null)) {
-      missingField.ingredients = instructionValidation;
+    if (ingredientsValidation.some((error) => error !== null)) {
+      missingField.ingredients = ingredientsValidation;
     }
-    // if (formData.ingredients.some(ingredient => !ingredient.trim())){
-    //   missingField.ingredients = "An ingredient is missing"
-    // }
-    // if (formData.instructions.some(instruction => !instruction.trim())){
-    //   missingField.instructions = "Instructions are required"
-    // }
 
+    const instructionValidation = formData. instructions.map((instruction, index) => 
+      !instruction.trim() ? `Instruction ${index + 1} is required` : null
+    ); 
+    if (instructionValidation.some((error) => error !== null)) {
+      missingField.instructions = instructionValidation;
+    }
+    
     setValidation(missingField);
     return Object.keys(missingField).length === 0;
   }
