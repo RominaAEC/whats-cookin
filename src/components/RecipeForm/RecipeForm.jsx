@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
 import AddIcon from "../../assets/icons/add.svg?react";
 
-export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, formLabel}) {
+export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, formLabel, validationErrors, setValidationErrors}) {
     const [focusedInput, setFocusedInput] = useState(null);
 
     // Update a specific field in formData
@@ -48,6 +48,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
     // Handle focus and blur events
     const handleFocus = (inputName) => {
         setFocusedInput(inputName);
+        setValidationErrors((prev) => ({ ...prev, [inputName]: "" }));
     };
 
     const handleBlur = () => {
@@ -63,7 +64,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     placeholder="Recipe name"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)} 
-                    className={`recipe-form__input ${focusedInput === "name" ? "recipe-form__input--active" : ""}`}
+                    className={`recipe-form__input ${focusedInput === "name" ? "recipe-form__input--active" : ""} ${validationErrors.name ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("name")}
                     onBlur={handleBlur}
                 />

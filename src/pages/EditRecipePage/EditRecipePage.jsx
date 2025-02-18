@@ -22,6 +22,7 @@ export default function EditRecipePage() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const [validationErrors, setValidationErrors] = useState({});
 
   useEffect(() => {
     const getRecipeById = async () => {
@@ -46,8 +47,23 @@ export default function EditRecipePage() {
     getRecipeById();
   }, [recipeId])
 
+  const validateForm = () => {
+    const missingField = {}; 
+
+    if (!formData.name.trim()){
+      missingField.name = "Recipe name is required"
+    }
+
+    setValidationErrors(missingField);
+    return Object.keys(missingField).length === 0;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
 
     const recipeData = {
       name: formData.name,
@@ -86,6 +102,8 @@ export default function EditRecipePage() {
         setFormData={setFormData}
         onCancel={redirectRoute}
         formLabel="Edit recipe"
+        validationErrors={validationErrors}
+        setValidationErrors={setValidationErrors}
       />
     </section>
   )

@@ -29,6 +29,10 @@
         &--active{
             border: 1px solid $evergreen;
         }
+
+        &--error{
+            border: 1px solid $red;
+        }
     }
 
     &__input-group{
