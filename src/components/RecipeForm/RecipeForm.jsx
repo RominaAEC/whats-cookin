@@ -3,8 +3,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import DeleteIcon from "../../assets/icons/delete.svg?react";
 import AddIcon from "../../assets/icons/add.svg?react";
+import ErrorIcon from "../../assets/icons/error.svg?react";
 
-export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, formLabel, validationErrors, setValidationErrors}) {
+export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, formLabel, validation, setValidation}) {
     const [focusedInput, setFocusedInput] = useState(null);
 
     // Update a specific field in formData
@@ -48,7 +49,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
     // Handle focus and blur events
     const handleFocus = (inputName) => {
         setFocusedInput(inputName);
-        setValidationErrors((prev) => ({ ...prev, [inputName]: "" }));
+        setValidation((prev) => ({ ...prev, [inputName]: "" }));
     };
 
     const handleBlur = () => {
@@ -64,43 +65,74 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     placeholder="Recipe name"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)} 
-                    className={`recipe-form__input ${focusedInput === "name" ? "recipe-form__input--active" : ""} ${validationErrors.name ? "recipe-form__input--error" : ""}`}
+                    className=
+                        {`recipe-form__input 
+                        ${focusedInput === "name" ? "recipe-form__input--active" : ""} 
+                        ${validation.name ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("name")}
                     onBlur={handleBlur}
                 />
+                {validation.name && <div className="recipe-form__error-container"> 
+                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                    <p className="recipe-form__error-message">{validation.name}</p>
+                </div>}
             </div>
             <div className="recipe-form__wrapper">
                 <label className="recipe-form__label">Prep Time</label>
                 <input
                     type="text"
-                    placeholder="Prep time"
+                    placeholder="e.g 15"
                     value={formData.prepTimeMinutes}
                     onChange={(e) => handleChange("prepTimeMinutes", e.target.value)}
-                    className={`recipe-form__input ${focusedInput === "prepTimeMinutes" ? "recipe-form__input--active" : ""}`}
+                    className=
+                        {`recipe-form__input 
+                        ${focusedInput === "prepTimeMinutes" ? "recipe-form__input--active" : ""} 
+                        ${validation.prepTimeMinutes ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("prepTimeMinutes")}
-                    onBlur={handleBlur} />
+                    onBlur={handleBlur} 
+                    />
+                {validation.prepTimeMinutes && <div className="recipe-form__error-container"> 
+                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                    <p className="recipe-form__error-message">{validation.prepTimeMinutes}</p>
+                </div>}
             </div>
             <div className="recipe-form__wrapper">
                 <label className="recipe-form__label">Cook Time</label>
                 <input
                     type="text"
-                    placeholder="Cook time"
+                    placeholder="e.g. 20"
                     value={formData.cookTimeMinutes}
                     onChange={(e) => handleChange("cookTimeMinutes", e.target.value)}
-                    className={`recipe-form__input ${focusedInput === "cookTimeMinutes" ? "recipe-form__input--active" : ""}`}
+                    className=
+                        {`recipe-form__input 
+                        ${focusedInput === "cookTimeMinutes" ? "recipe-form__input--active" : ""}
+                        ${validation.cookTimeMinutes ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("cookTimeMinutes")}
-                    onBlur={handleBlur} />
+                    onBlur={handleBlur} 
+                />
+                {validation.cookTimeMinutes && <div className="recipe-form__error-container"> 
+                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                    <p className="recipe-form__error-message">{validation.cookTimeMinutes}</p>
+                </div>}
             </div>
             <div className="recipe-form__wrapper">
                 <label className="recipe-form__label">Servings</label>
                 <input
                     type="text"
-                    placeholder="Servings"
+                    placeholder="e.g. 2"
                     value={formData.servings}
                     onChange={(e) => handleChange("servings", e.target.value)}
-                    className={`recipe-form__input ${focusedInput === "servings" ? "recipe-form__input--active" : ""}`}
+                    className=
+                        {`recipe-form__input 
+                        ${focusedInput === "servings" ? "recipe-form__input--active" : ""}
+                        ${validation.servings ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("servings")}
-                    onBlur={handleBlur} />
+                    onBlur={handleBlur} 
+                />
+                {validation.servings && <div className="recipe-form__error-container"> 
+                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                    <p className="recipe-form__error-message">{validation.servings}</p>
+                </div>}
             </div>
 
             <div className="recipe-form__wrapper">
@@ -108,28 +140,37 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                 <div className="recipe-form__input-container">
                     {formData.ingredients.map((ingredient, index) => (
                         <div key={index} className="recipe-form__input-group">
-                            <input
-                                type="text"
-                                value={ingredient}
-                                onChange={(e) => {
-                                    const updatedIngredients = [...formData.ingredients];
-                                    updatedIngredients[index] = e.target.value;
-                                    handleChange("ingredients", updatedIngredients);
-                                }}
-                                placeholder={`Ingredient ${index + 1}`}
-                                className={`recipe-form__input ${focusedInput === `ingredient-${index}` ? "recipe-form__input--active" : ""}`}
-                                onFocus={() => handleFocus(`ingredient-${index}`)}
-                                onBlur={handleBlur}
-                            />
-                            {formData.ingredients.length > 1 && (
-                                <button
-                                    type="button"
-                                    onClick={() => removeIngredient(index)}
-                                    className="recipe-form__button-small"
-                                >
-                                    <DeleteIcon className="recipe-form__icon" />
-                                </button>
-                            )}
+                            <div className="recipe-form__input-individual"> 
+                                <input
+                                    type="text"
+                                    value={ingredient}
+                                    onChange={(e) => {
+                                        const updatedIngredients = [...formData.ingredients];
+                                        updatedIngredients[index] = e.target.value;
+                                        handleChange("ingredients", updatedIngredients);
+                                    }}
+                                    placeholder={`Ingredient ${index + 1}`}
+                                    className=
+                                    {`recipe-form__input 
+                                    ${focusedInput === `ingredient-${index}` ? "recipe-form__input--active" : ""}
+                                    ${validation.ingredients?.[index] ? "recipe-form__input--error" : ""}`}
+                                    onFocus={() => handleFocus(`ingredient-${index}`)}
+                                    onBlur={handleBlur}
+                                />
+                                {formData.ingredients.length > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => removeIngredient(index)}
+                                        className="recipe-form__button-small"
+                                    >
+                                        <DeleteIcon className="recipe-form__icon" />
+                                    </button>
+                                )}
+                            </div>
+                            {validation.ingredients?.[index] && <div className="recipe-form__error-container"> 
+                                 <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                                <p className="recipe-form__error-message">{validation.ingredients[index]}</p>
+                            </div>}
                         </div>
                     ))}
                     <button type="button" onClick={addIngredient} className="recipe-form__button recipe-form__button--add">
@@ -137,6 +178,10 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                         Add more ingredients
                     </button>
                 </div>
+                {/* {validation.ingredients?.[index] && <div className="recipe-form__error-container"> 
+                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error"/>
+                    <p className="recipe-form__error-message">{validation.ingredients[index]}</p>
+                </div>} */}
             </div>
 
             <div className="recipe-form__wrapper">

@@ -22,7 +22,7 @@ export default function EditRecipePage() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [validationErrors, setValidationErrors] = useState({});
+  const [validation, setValidation] = useState({});
 
   useEffect(() => {
     const getRecipeById = async () => {
@@ -53,8 +53,30 @@ export default function EditRecipePage() {
     if (!formData.name.trim()){
       missingField.name = "Recipe name is required"
     }
+    if (!formData.prepTimeMinutes.trim()){
+      missingField.prepTimeMinutes = "Prep Time is required"
+    }
+    if (!formData.cookTimeMinutes.trim()){
+      missingField.cookTimeMinutes = "Cook Time is required"
+    }
+    if (!formData.servings.trim()){
+      missingField.servings = "Servings is required"
+    }
 
-    setValidationErrors(missingField);
+    const instructionValidation = formData. ingredients.map((ingredient, index) => 
+      !ingredient.trim() ? `Ingredient ${index + 1} is required` : null
+    ); 
+    if (instructionValidation.some((error) => error !== null)) {
+      missingField.ingredients = instructionValidation;
+    }
+    // if (formData.ingredients.some(ingredient => !ingredient.trim())){
+    //   missingField.ingredients = "An ingredient is missing"
+    // }
+    // if (formData.instructions.some(instruction => !instruction.trim())){
+    //   missingField.instructions = "Instructions are required"
+    // }
+
+    setValidation(missingField);
     return Object.keys(missingField).length === 0;
   }
 
@@ -102,8 +124,8 @@ export default function EditRecipePage() {
         setFormData={setFormData}
         onCancel={redirectRoute}
         formLabel="Edit recipe"
-        validationErrors={validationErrors}
-        setValidationErrors={setValidationErrors}
+        validation={validation}
+        setValidation={setValidation}
       />
     </section>
   )
