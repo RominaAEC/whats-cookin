@@ -7,7 +7,7 @@ import AddIcon from "../../assets/icons/add.svg?react";
 export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, formLabel}) {
     const [focusedInput, setFocusedInput] = useState(null);
 
-    // Function to update a specific field in formData
+    // Update a specific field in formData
     const handleChange = (field, value) => {
         setFormData((prev) => ({
             ...prev,
