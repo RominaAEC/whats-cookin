@@ -100,14 +100,22 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $evergreen;
+        background-color: $evergreen-opacity;
         flex-shrink: 0;
+
+        &--active{
+          background-color: $evergreen;
+        }
       }
 
-      &__header-icon{
+      &__icon-save{
         width:1.25rem;
         height: 1.25rem;
-        fill: $white;
+        fill: $evergreen;
+
+        &--active{
+          fill: $white;
+        }
       }
 
       &__ingredients-container{
@@ -134,6 +142,7 @@
       &__time-container{
        min-width: 4rem;
       }
+      
       &__time{
         display: flex;
         gap:0.25rem;

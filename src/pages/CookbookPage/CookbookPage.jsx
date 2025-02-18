@@ -12,7 +12,7 @@ export default function CookbookPage() {
   const getRecipes = async () => {
     try {
       const response = await axios.get('http://localhost:8080/recipes')
-      console.log(response.data);
+      // console.log(response.data);
       setRecipes(response.data);
     } catch (error) {
       console.error("Error fetching recipes", error);
@@ -35,9 +35,9 @@ export default function CookbookPage() {
   };
 
   return (
-    <section className="cookbook"> 
+    <section className="cookbook">
       <article className="cookbook__header">
-        <BookIcon className="cookbook__header-icon"/>
+        <BookIcon className="cookbook__header-icon" />
         <h2 className="cookbook__header-title"> My Cookbook</h2>
       </article >
       <form className="recipe-search__form">
@@ -45,18 +45,18 @@ export default function CookbookPage() {
           type="text"
           className={`recipe-search__input ${searchState === "active" ? "recipe-search__input--active" : ""
             }`}
-          placeholder="Your ingredients..."
+          placeholder="Search recipe name..."
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
-        </form>
-        <Link to="/cookbook/add-recipe">
-            <button className="cookbook__button">
-              <AddIcon className="cookbook__button-icon"/>
-              Add recipe
-            </button>
-        </Link>
-        <SearchRecipeCard recipes={recipes} basePath="/cookbook" />
+      </form>
+      <Link to="/cookbook/add-recipe">
+        <button className="cookbook__button">
+          <AddIcon className="cookbook__button-icon" />
+          Add recipe
+        </button>
+      </Link>
+      <SearchRecipeCard recipes={recipes} basePath="/cookbook" />
     </section>
   )
 }

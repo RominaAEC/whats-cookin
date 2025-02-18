@@ -41,14 +41,14 @@ export default function AddRecipePage() {
     }
 
     const ingredientsValidation = formData.ingredients.map((ingredient, index) =>
-      !ingredient.trim() ? `Ingredient ${index + 1} is required` : null
+      !ingredient.trim() ? `Ingredient ${index + 1} is missing` : null
     );
     if (ingredientsValidation.some((error) => error !== null)) {
       missingField.ingredients = ingredientsValidation;
     }
 
     const instructionValidation = formData.instructions.map((instruction, index) =>
-      !instruction.trim() ? `Instruction ${index + 1} is required` : null
+      !instruction.trim() ? `Instruction ${index + 1} is missing` : null
     );
     if (instructionValidation.some((error) => error !== null)) {
       missingField.instructions = instructionValidation;
@@ -80,9 +80,9 @@ export default function AddRecipePage() {
           "Content-Type": "application/json",
         }
       });
-      console.log("Recipe added successfully:", response.data);
-      // Reset the form data to initial values
-      setFormData(initialFormData);
+      // console.log("Recipe added successfully:", response.data);
+      
+      setFormData(initialFormData); // Reset the form data to initial values
       // Redirect to the /cookbook route
       navigate(redirectRoute);
 

@@ -20,7 +20,7 @@ export default function CookbookSingleRecipePage() {
     const getRecipeById = async (id) => {
         try {
             const response = await axios.get(`http://localhost:8080/recipes/${id}`);
-            console.log(response.data);
+            // console.log(response.data);
             setRecipe(response.data); // Set the recipe data directly
         } catch (error) {
             console.error("Error fetching recipe", error);
@@ -40,7 +40,6 @@ export default function CookbookSingleRecipePage() {
     const openModal = (item) => {
       setSelectedItem(item);
       setIsModalOpen(true);
-      console.log("hello");
     };
   
     const closeModal = () => {
@@ -57,7 +56,7 @@ export default function CookbookSingleRecipePage() {
         })
         .catch((error) =>{
             console.error("Error deleting item:", error);
-            alert("Failed to delete item.");
+            // alert("Failed to delete item.");
         })
       }
     };

@@ -11,12 +11,13 @@ import BowlIcon from "../../assets/icons/arcticons_recipe-keeper.svg?react";
 
 export default function SingleRecipeSearchPage() {
     const [recipe, setRecipe] = useState(null); // Store single recipe data
+    const [recipeSaved, setRecipeSaved] = useState(false);
     const { recipeId } = useParams();
 
     const getRecipeById = async (id) => {
         try {
             const response = await axios.get(`https://dummyjson.com/recipes/${id}`);
-            console.log(response.data);
+            // console.log(response.data);
             setRecipe(response.data); // Set the recipe data directly
         } catch (error) {
             console.error("Error fetching recipe", error);
@@ -28,6 +29,29 @@ export default function SingleRecipeSearchPage() {
             getRecipeById(recipeId);
         }
     }, [recipeId]);
+
+    const handleSave = async () => {
+        if (!recipe || recipeSaved) return; // Ensure there's a recipe to save
+
+        try {
+            const response = await axios.post("http://localhost:8080/recipes", {
+                name: recipe.name,
+                ingredients: recipe.ingredients,
+                instructions: recipe.instructions,
+                prepTimeMinutes: recipe.prepTimeMinutes,
+                cookTimeMinutes: recipe.cookTimeMinutes,
+                servings: recipe.servings,
+                image: recipe.image
+            });
+
+            if (response.status === 201) {
+                console.log("Recipe bookmarked successfully:", response.data);
+                setRecipeSaved(true);
+            }
+        } catch (error) {
+            console.error("Error bookmarking recipe:", error);
+        }
+    }
 
     return (
         <section className="single-recipe">
@@ -61,8 +85,11 @@ export default function SingleRecipeSearchPage() {
                             <div className="single-recipe__title-container">
                                 <h2 className="single-recipe__title">{recipe.name}</h2>
                             </div>
-                            <button className="single-recipe__header-button">
-                                <BookmarkIcon className="single-recipe__header-icon" />
+                            <button
+                                className={`single-recipe__header-button ${recipeSaved ? "single-recipe__header-button--active" : ""}`}
+                                onClick={handleSave}>
+                                <BookmarkIcon
+                                    className={`single-recipe__icon-save ${recipeSaved ? "single-recipe__icon-save--active" : ""}`}/>
                             </button>
                         </div>
                         <div className="single-recipe__ingredients-container">
