@@ -11,7 +11,7 @@ export default function CookbookPage() {
 
   const getRecipes = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/recipes')
+      const response = await axios.get('http://localhost:8080/recipes');
       // console.log(response.data);
       setRecipes(response.data);
     } catch (error) {

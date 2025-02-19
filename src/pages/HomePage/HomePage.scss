@@ -43,6 +43,9 @@
         }
     }
 
+    &__error{
+        color: $red;
+    }
 
     &__button{
         width:100%;

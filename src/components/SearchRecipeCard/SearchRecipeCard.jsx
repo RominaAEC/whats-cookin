@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 export default function SearchRecipeCard({ recipes, basePath }) {
   return (
     <ul className="result-recipe">
-        {recipes.map((recipe) => (
+        {recipes.map((recipe, index) => (
             <li
-                key={recipe.id}
+                key={index}
                 className="result-recipe__container"
             >
                  <Link to={`${basePath}/${recipe.id}`}>

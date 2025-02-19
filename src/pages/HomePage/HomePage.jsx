@@ -2,15 +2,18 @@ import "./HomePage.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PotIcon from "../../assets/icons/arcticons_rakuten-recipe.svg"
+import ErrorIcon from "../../assets/icons/error.svg?react";
 
 export default function HomePage() {
  
   const [searchState, setSearchState] = useState("default");  // Search form logic and functionality
   const [searchQuery, setSearchQuery] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleFocus = (e) => {
     setSearchState("active");
+    setError("");
   };
 
   const handleBlur = (e) => {
@@ -19,6 +22,15 @@ export default function HomePage() {
 
   const handleSearch = (e) => {
     e.preventDefault();
+
+    if (!searchQuery.trim()) {
+      setError("Please enter some ingredients to search."); // Set error message
+      return; // Prevent form submission
+    }
+
+    // Clear any previous error
+    setError("");
+
     navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`);
   };
 
@@ -32,13 +44,18 @@ export default function HomePage() {
             type="text"
             className=
               {`search-ingredients__input 
-              ${searchState === "active" ? "search-ingredients__input--active" : ""}`}
+              ${searchState === "active" ? "search-ingredients__input--active" : ""}
+              ${error ? "recipe-form__input--error" : "" }`}
             placeholder="Your ingredients..."
             value={searchQuery}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+          {error && <div className="recipe-form__error-container">
+            <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
+            <p className="recipe-form__error-message">{error}</p>
+          </div>}
           <button type="submit" className="search-ingredients__button">
             Find me a recipe
           </button>
