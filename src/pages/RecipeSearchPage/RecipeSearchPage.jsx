@@ -21,13 +21,28 @@ export default function RecipeSearchPage() {
     try {
       const response = await axios.get('https://dummyjson.com/recipes');
 
+      // Filtering search results 
       const searchIngredients = query.toLowerCase().split(",").map((ingredient) => ingredient.trim());
+      const filteredRecipes = response.data.recipes.filter(recipe => {
 
-      const filteredRecipes = response.data.recipes.filter(recipe =>{
-          return (
-            searchIngredients.some((ingredient) => recipe.name.toLowerCase().includes(ingredient)) ||
-            searchIngredients.some((ingredient) => recipe.ingredients.some ((recipeIngredient) => recipeIngredient.toLowerCase().includes(ingredient)))
-          );
+        let ingredientCount = 0;
+
+        searchIngredients.forEach((ingredient) => {
+          const includesName = recipe.name.toLowerCase().includes(ingredient);
+          const includesIngredient = recipe.ingredients.some((recipeIngredient) =>
+            recipeIngredient.toLowerCase().includes(ingredient));
+
+          if (includesName || includesIngredient) {
+            ingredientCount++;
+          }
+        });
+
+        if (searchIngredients.length === 1) {
+          return ingredientCount >= 1;
+        }
+
+        return ingredientCount >= 2;
+
       });
       // console.log(response.data);
       setRecipes(filteredRecipes);
@@ -36,7 +51,7 @@ export default function RecipeSearchPage() {
     }
   }
 
- // Search form logic and functionality
+  // Search form logic and functionality
   const [searchState, setSearchState] = useState("default");
 
   const handleFocus = (e) => {
@@ -48,17 +63,17 @@ export default function RecipeSearchPage() {
   };
 
   const handleSearch = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`);
   }
 
   return (
     <section className="recipe-search">
-      <form className="recipe-search__form"  onSubmit={handleSearch}>
+      <form className="recipe-search__form" onSubmit={handleSearch}>
         <input
           type="text"
           className=
-            {`recipe-search__input 
+          {`recipe-search__input 
             ${searchState === "active" ? "recipe-search__input--active" : ""}`}
           placeholder="Your ingredients..."
           value={searchQuery}
