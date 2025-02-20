@@ -76,7 +76,7 @@ export default function AddRecipePage() {
 
     const recipeData = {
       name: formData.name,
-      prepTimeMinutes:(formData.prepTimeMinutes),
+      prepTimeMinutes: (formData.prepTimeMinutes),
       cookTimeMinutes: (formData.cookTimeMinutes),
       servings: (formData.servings),
       ingredients: formData.ingredients.filter((ingredient) => ingredient.trim() !== ""),
@@ -90,7 +90,7 @@ export default function AddRecipePage() {
         }
       });
       // console.log("Recipe added successfully:", response.data);
-      
+
       setFormData(initialFormData); // Reset the form data to initial values
       // Redirect to the /cookbook route
       navigate(redirectRoute);

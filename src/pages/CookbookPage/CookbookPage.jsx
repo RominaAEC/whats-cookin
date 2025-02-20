@@ -11,7 +11,8 @@ export default function CookbookPage() {
   const [recipes, setRecipes] = useState([]); // State to store all recipes data
   const [filteredRecipes, setFilteredRecipes] = useState([]); // State to store filtered recipes
   const [searchQuery, setSearchQuery] = useState(""); // State to store the search query
-  // Search form logic and functionality
+
+  // Search form logic and functionality // 
   const [searchState, setSearchState] = useState("default");
   const [error, setError] = useState("");
 
@@ -89,7 +90,7 @@ export default function CookbookPage() {
         </button>
       </Link>
       {error && <div className="cookbook__error-container">
-        <BowlIcon className="cookbook__error-icon"/>
+        <BowlIcon className="cookbook__error-icon" />
         <h3 className="cookbook__error-message">{error}</h3>
       </div>}
       <CookbookRecipeCard recipes={filteredRecipes} basePath="/cookbook" />

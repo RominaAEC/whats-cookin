@@ -65,7 +65,6 @@ export default function RecipeSearchPage() {
         }
 
         return ingredientCount >= 1;
-
       });
 
       // Check if no recipes matched the search
@@ -106,8 +105,9 @@ export default function RecipeSearchPage() {
       return; // Prevent form submission
     }
 
-    // Clear any previous error state
-    setError("");
+    setError(""); // Clear any previous error state
+    navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`); // Update the URL with the search query
+    getRecipes(searchQuery); // Fetch recipes again
   };
 
   return (
@@ -135,7 +135,7 @@ export default function RecipeSearchPage() {
           Find me a recipe
         </button>
       </form>
-      {noRecipesFound && (
+      {noRecipesFound || error && (
         <div className="recipe-search__no-results">
           <BowlIcon className="recipe-search__no-results-icon" />
           <h3 className="recipe-search__no-results-message">No recipes found. Please try different ingredients.</h3>

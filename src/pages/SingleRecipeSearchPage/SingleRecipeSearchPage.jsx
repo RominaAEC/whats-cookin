@@ -46,7 +46,7 @@ export default function SingleRecipeSearchPage() {
             });
 
             if (response.status === 201) {
-                console.log("Recipe bookmarked successfully:", response.data);
+                // console.log("Recipe bookmarked successfully:", response.data);
                 setRecipeSaved(true);
             }
         } catch (error) {

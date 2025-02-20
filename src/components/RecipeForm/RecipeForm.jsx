@@ -69,7 +69,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)}
                     className=
-                        {`recipe-form__input 
+                    {`recipe-form__input 
                         ${focusedInput === "name" ? "recipe-form__input--active" : ""} 
                         ${validation.name ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("name")}
@@ -91,7 +91,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     value={formData.prepTimeMinutes}
                     onChange={(e) => handleChange("prepTimeMinutes", e.target.value)}
                     className=
-                        {`recipe-form__input 
+                    {`recipe-form__input 
                         ${focusedInput === "prepTimeMinutes" ? "recipe-form__input--active" : ""} 
                         ${validation.prepTimeMinutes ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("prepTimeMinutes")}
@@ -113,7 +113,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     value={formData.cookTimeMinutes}
                     onChange={(e) => handleChange("cookTimeMinutes", e.target.value)}
                     className=
-                        {`recipe-form__input 
+                    {`recipe-form__input 
                         ${focusedInput === "cookTimeMinutes" ? "recipe-form__input--active" : ""}
                         ${validation.cookTimeMinutes ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("cookTimeMinutes")}
@@ -135,7 +135,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                     value={formData.servings}
                     onChange={(e) => handleChange("servings", e.target.value)}
                     className=
-                        {`recipe-form__input 
+                    {`recipe-form__input 
                         ${focusedInput === "servings" ? "recipe-form__input--active" : ""}
                         ${validation.servings ? "recipe-form__input--error" : ""}`}
                     onFocus={() => handleFocus("servings")}
@@ -165,7 +165,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                                     }}
                                     placeholder={`Ingredient ${index + 1}`}
                                     className=
-                                        {`recipe-form__input 
+                                    {`recipe-form__input 
                                         ${focusedInput === `ingredient-${index}` ? "recipe-form__input--active" : ""}
                                         ${validation.ingredients?.[index] ? "recipe-form__input--error" : ""}`}
                                     onFocus={() => {
@@ -220,7 +220,7 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
                                     }}
                                     placeholder={`Instruction ${index + 1}`}
                                     className=
-                                        {`recipe-form__input 
+                                    {`recipe-form__input 
                                         ${focusedInput === `instruction-${index}` ? "recipe-form__input--active" : ""}
                                         ${validation.instructions?.[index] ? "recipe-form__input--error" : ""}`}
                                     onFocus={() => {

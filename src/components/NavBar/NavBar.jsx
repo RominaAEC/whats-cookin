@@ -28,9 +28,9 @@ export default function NavBar() {
     }, []);
 
     // Regex to match specific routes /search-results/:recipeId and /cookbook/:recipeId
-    const isSpecialPage = 
-    /^\/search-results\/[^/]+$/.test(pathname) || 
-    /^\/cookbook\/\d+$/.test(pathname);
+    const isSpecialPage =
+        /^\/search-results\/[^/]+$/.test(pathname) ||
+        /^\/cookbook\/\d+$/.test(pathname);
 
     // Conditionally add 'navbar--hide' class for mobile special pages
     const navbarClass = isSpecialPage && isMobile ? "navbar navbar--hide" : "navbar";
@@ -40,21 +40,21 @@ export default function NavBar() {
             <Link className="navbar__logo-container" to="/">
                 <img className="navbar__logo" src={Logo} alt="What's Cookin' logo" />
             </Link>
-            
+
             <article className="navbar__button-container">
-            <Link to="/">
-                <button className="navbar__button">
-                    <SearchIcon className="navbar__button-icon" />
-                    <span className="navbar__button-label">Recipe finder</span>
-                </button>
-            </Link>
-            <Link to="/cookbook">
-                <button className="navbar__button">
-                    <BookIcon className="navbar__button-icon" />
-                    <span className="navbar__button-label">My cookbook</span>
-                </button>
-            </Link>
-                
+                <Link to="/">
+                    <button className="navbar__button">
+                        <SearchIcon className="navbar__button-icon" />
+                        <span className="navbar__button-label">Recipe finder</span>
+                    </button>
+                </Link>
+                <Link to="/cookbook">
+                    <button className="navbar__button">
+                        <BookIcon className="navbar__button-icon" />
+                        <span className="navbar__button-label">My cookbook</span>
+                    </button>
+                </Link>
+
             </article>
         </section>
     )

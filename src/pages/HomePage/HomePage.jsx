@@ -5,7 +5,6 @@ import PotIcon from "../../assets/icons/arcticons_rakuten-recipe.svg"
 import ErrorIcon from "../../assets/icons/error.svg?react";
 
 export default function HomePage() {
- 
   const [searchState, setSearchState] = useState("default");  // Search form logic 
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState("");
@@ -28,9 +27,7 @@ export default function HomePage() {
       return; // Prevent form submission
     }
 
-    // Clear any previous error
-    setError("");
-
+    setError(""); // Clear any previous error
     navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`);
   };
 

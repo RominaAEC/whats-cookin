@@ -22,7 +22,7 @@ export default function EditRecipePage() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [validation, setValidation] = useState({});
+  const [validation, setValidation] = useState({});  // Stores error messages/states related to the form fields 
 
   useEffect(() => {
     const getRecipeById = async () => {
@@ -48,44 +48,44 @@ export default function EditRecipePage() {
   }, [recipeId])
 
   const validateForm = () => {
-    const missingField = {}; 
+    const missingField = {};
 
-    if (!formData.name.trim()){
+    if (!formData.name.trim()) {
       missingField.name = "Recipe name is required"
     }
 
-    if (!formData.prepTimeMinutes.trim()){
+    if (!formData.prepTimeMinutes.trim()) {
       missingField.prepTimeMinutes = "Prep Time is required"
     } else if (isNaN(formData.prepTimeMinutes)) {
       missingField.prepTimeMinutes = "Prep Time must be a number";
     }
 
-    if (!formData.cookTimeMinutes.trim()){
+    if (!formData.cookTimeMinutes.trim()) {
       missingField.cookTimeMinutes = "Cook Time is required"
     } else if (isNaN(formData.cookTimeMinutes)) {
       missingField.cookTimeMinutes = "Cook Time must be a number";
     }
 
-    if (!formData.servings.trim()){
+    if (!formData.servings.trim()) {
       missingField.servings = "Servings is required"
     } else if (isNaN(formData.servings)) {
       missingField.servings = "Servings must be a number";
     }
 
-    const ingredientsValidation = formData. ingredients.map((ingredient, index) => 
+    const ingredientsValidation = formData.ingredients.map((ingredient, index) =>
       !ingredient.trim() ? `Ingredient ${index + 1} is missing` : null
-    ); 
+    );
     if (ingredientsValidation.some((error) => error !== null)) {
       missingField.ingredients = ingredientsValidation;
     }
 
-    const instructionValidation = formData. instructions.map((instruction, index) => 
+    const instructionValidation = formData.instructions.map((instruction, index) =>
       !instruction.trim() ? `Instruction ${index + 1} is missing` : null
-    ); 
+    );
     if (instructionValidation.some((error) => error !== null)) {
       missingField.instructions = instructionValidation;
     }
-    
+
     setValidation(missingField);
     return Object.keys(missingField).length === 0;
   }
@@ -113,7 +113,7 @@ export default function EditRecipePage() {
         },
       });
       // console.log("Recipe updated successfully:", response.data);
-      
+
       navigate(redirectRoute); // Redirect to the /cookbook route
     } catch (error) {
       console.error("Error updating recipe:", error);
@@ -123,7 +123,7 @@ export default function EditRecipePage() {
   return (
     <section className="edit-recipe">
       <article className="edit-recipe__header">
-        <Link to= {redirectRoute}>
+        <Link to={redirectRoute}>
           <button className="edit-recipe__button">
             <BackIcon className="edit-recipe__icon" />
           </button>

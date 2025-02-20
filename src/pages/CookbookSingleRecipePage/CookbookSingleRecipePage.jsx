@@ -16,7 +16,7 @@ export default function CookbookSingleRecipePage() {
     const [recipe, setRecipe] = useState(null); // Store single recipe data
     const { recipeId } = useParams();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null); 
     const navigate = useNavigate();
 
     const getRecipeById = async (id) => {
@@ -112,10 +112,12 @@ export default function CookbookSingleRecipePage() {
                             </Link>
                         </article>
                     </div>
+                    
                     <div className="single-recipe__image-container">
                         <img className="single-recipe__image" src={recipe.image} alt={recipe.name} />
                         <div className="single-recipe__image-overlay"></div>
                     </div>
+
                     <div className="single-recipe__card">
                         <div className="single-recipe__header">
                             <div className="single-recipe__title-container">
@@ -130,10 +132,9 @@ export default function CookbookSingleRecipePage() {
                                         <EditIcon className="single-recipe__header-icon single-recipe__header-icon--edit" />
                                     </button>
                                 </Link>
-
                             </div>
-
                         </div>
+
                         <div className="single-recipe__ingredients-container">
                             <div className="single-recipe__ingredients">
                                 <div className="single-recipe__ingredients-header">
@@ -161,6 +162,7 @@ export default function CookbookSingleRecipePage() {
                                 </div>
                             </div>
                         </div>
+
                         <div className="single-recipe__instructions-container">
                             <div className="single-recipe__ingredients-header">
                                 <BowlIcon className="single-recipe__ingredients-icon" />
