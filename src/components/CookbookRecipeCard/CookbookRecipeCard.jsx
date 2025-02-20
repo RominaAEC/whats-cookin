@@ -1,7 +1,7 @@
-import "./SearchRecipeCard.scss";
+import "./CookbookRecipeCard.scss";
 import { Link } from "react-router-dom";
 
-export default function SearchRecipeCard({ recipes }) {
+export default function SearchRecipeCard({ recipes, basePath }) {
   return (
     <ul className="result-recipe">
         {recipes.map((recipe, index) => (
@@ -9,7 +9,7 @@ export default function SearchRecipeCard({ recipes }) {
                 key={index}
                 className="result-recipe__container"
             >
-                 <Link to={`${recipe.source}/${recipe.id}`}>
+                 <Link to={`${basePath}/${recipe.id}`}>
                 <img className="result-recipe__image" src={recipe.image} alt={recipe.name}/>
                 <div className="result-recipe__wrapper">
                     <h4 className="result-recipe__title">{recipe.name}</h4>

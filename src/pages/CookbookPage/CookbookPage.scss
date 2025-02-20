@@ -28,10 +28,25 @@
         border: none;
         background-color: $evergreen;
         color: $white;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
     }
 
     &__button-icon{
         fill: $white;
+    }
+
+    &__error-container{
+        width:100%;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $evergreen;
+    }
+
+    &__error-icon{
+        width: 6.5rem;
+        height: 6.5rem;
     }
 }
