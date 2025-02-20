@@ -4,16 +4,23 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BookIcon from "../../assets/icons/book.svg?react";
 import AddIcon from "../../assets/icons/add.svg?react";
-import SearchRecipeCard from "../../components/SearchRecipeCard/SearchRecipeCard";
+import BowlIcon from "../../assets/icons/arcticons_recipe-keeper.svg?react";
+import CookbookRecipeCard from "../../components/CookbookRecipeCard/CookbookRecipeCard"
 
 export default function CookbookPage() {
-  const [recipes, setRecipes] = useState([]); // State to store recipes data
+  const [recipes, setRecipes] = useState([]); // State to store all recipes data
+  const [filteredRecipes, setFilteredRecipes] = useState([]); // State to store filtered recipes
+  const [searchQuery, setSearchQuery] = useState(""); // State to store the search query
+  // Search form logic and functionality
+  const [searchState, setSearchState] = useState("default");
+  const [error, setError] = useState("");
 
   const getRecipes = async () => {
     try {
       const response = await axios.get('http://localhost:8080/recipes');
       // console.log(response.data);
       setRecipes(response.data);
+      setFilteredRecipes(response.data); // Initially, show all recipes
     } catch (error) {
       console.error("Error fetching recipes", error);
     }
@@ -23,17 +30,40 @@ export default function CookbookPage() {
     getRecipes();
   }, []);
 
-  // Search form logic and functionality
-  const [searchState, setSearchState] = useState("default");
-
   const handleFocus = (e) => {
     setSearchState("active");
+    setError("");
   };
 
   const handleBlur = (e) => {
     setSearchState("default");
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    if (query) {
+      // Filter recipes by name
+      const filtered = recipes.filter((recipe) =>
+        recipe.name.toLowerCase().includes(query)
+      );
+      setFilteredRecipes(filtered);
+
+      // Display a message if no recipes match the search query
+      if (filtered.length === 0) {
+        setError("No recipes found");
+      } else {
+        setError("");
+      }
+    } else {
+      // If the search query is empty, show all recipes
+      setFilteredRecipes(recipes);
+      setError("");
+    }
+  }
   return (
     <section className="cookbook">
       <article className="cookbook__header">
@@ -46,8 +76,10 @@ export default function CookbookPage() {
           className={`recipe-search__input ${searchState === "active" ? "recipe-search__input--active" : ""
             }`}
           placeholder="Search recipe name..."
+          value={searchQuery}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          onChange={handleSearch}
         />
       </form>
       <Link to="/cookbook/add-recipe">
@@ -56,7 +88,11 @@ export default function CookbookPage() {
           Add recipe
         </button>
       </Link>
-      <SearchRecipeCard recipes={recipes} basePath="/cookbook" />
+      {error && <div className="cookbook__error-container">
+        <BowlIcon className="cookbook__error-icon"/>
+        <h3 className="cookbook__error-message">{error}</h3>
+      </div>}
+      <CookbookRecipeCard recipes={filteredRecipes} basePath="/cookbook" />
     </section>
   )
 }

@@ -22,7 +22,7 @@ export default function RecipeSearchPage() {
     } else {
       setRecipes([]); // Clear recipes if there is no search query
     }
-    
+
   }, [location.search]);
 
   const getRecipes = async (query) => {
@@ -33,8 +33,8 @@ export default function RecipeSearchPage() {
       ]);
 
       const combinedRecipes = [
-        ...source1.data.recipes, // add source to determine basePath
-        ...source2.data
+        ...source1.data.recipes.map(recipe => ({ ...recipe, source: "/search-results" })), // add source to determine basePath
+        ...source2.data.map(recipe => ({ ...recipe, source: "/cookbook" }))
       ];
 
       // Filtering search results 
@@ -54,14 +54,13 @@ export default function RecipeSearchPage() {
           }
         });
 
-        if (searchIngredients.length === 1) {
-          return ingredientCount >= 1;
+        if (searchIngredients.length >= 3) {
+          return ingredientCount >= 3;
         }
 
-        return ingredientCount >= 2;
+        return ingredientCount >= 1;
 
       });
-      // console.log(response.data);
       setRecipes(filteredRecipes);
     } catch (error) {
       console.error("Error fetching recipes", error);
@@ -74,6 +73,7 @@ export default function RecipeSearchPage() {
 
   const handleFocus = (e) => {
     setSearchState("active");
+    setError("");
   };
 
   const handleBlur = (e) => {
@@ -82,7 +82,7 @@ export default function RecipeSearchPage() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`);
+
     if (searchQuery.trim()) {
       navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`);
     } else {
@@ -94,34 +94,36 @@ export default function RecipeSearchPage() {
       return; // Prevent form submission
     }
 
-    // Clear any previous error
+    // Clear any previous error state
     setError("");
-
   };
 
   return (
     <section className="recipe-search">
       <form className="recipe-search__form" onSubmit={handleSearch}>
-        <input
-          type="text"
-          className=
-          {`recipe-search__input 
-            ${searchState === "active" ? "recipe-search__input--active" : ""}`}
-          placeholder="Your ingredients..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        {error && <div className="recipe-form__error-container">
-          <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
-          <p className="recipe-form__error-message">{error}</p>
-        </div>}
+        <div className="recipe-search__input-container">
+          <input
+            type="text"
+            className=
+            {`recipe-search__input 
+              ${searchState === "active" ? "recipe-search__input--active" : ""}
+              ${error ? "recipe-form__input--error" : ""}`}
+            placeholder="Your ingredients..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          />
+          {error && <div className="recipe-form__error-container">
+            <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
+            <p className="recipe-form__error-message">{error}</p>
+          </div>}
+        </div>
         <button type="submit" className="recipe-search__button">
           Find me a recipe
         </button>
       </form>
-      <SearchRecipeCard recipes={recipes} basePath="/search-results" />
+      <SearchRecipeCard recipes={recipes}/>
     </section>
   )
 }
