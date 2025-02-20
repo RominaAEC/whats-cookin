@@ -9,7 +9,8 @@ export default function SearchRecipeCard({ recipes }) {
                 key={index}
                 className="result-recipe__container"
             >
-                 <Link to={`${recipe.source}/${recipe.id}`}>
+                 <Link to={`${recipe.source}/${recipe.id}`}
+                 onClick={() => sessionStorage.setItem("previousPage", window.location.pathname + window.location.search)}>
                 <img className="result-recipe__image" src={recipe.image} alt={recipe.name}/>
                 <div className="result-recipe__wrapper">
                     <h4 className="result-recipe__title">{recipe.name}</h4>

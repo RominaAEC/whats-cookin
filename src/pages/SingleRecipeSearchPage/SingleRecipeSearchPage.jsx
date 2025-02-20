@@ -1,7 +1,7 @@
 import "./SingleRecipeSearchPage.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import SearchIcon from "../../assets/icons/search.svg?react";
 import BookIcon from "../../assets/icons/book.svg?react";
 import BackIcon from "../../assets/icons/arrow-back.svg?react";
@@ -13,6 +13,7 @@ export default function SingleRecipeSearchPage() {
     const [recipe, setRecipe] = useState(null); // Store single recipe data
     const [recipeSaved, setRecipeSaved] = useState(false);
     const { recipeId } = useParams();
+    const navigate = useNavigate();
 
     const getRecipeById = async (id) => {
         try {
@@ -53,16 +54,20 @@ export default function SingleRecipeSearchPage() {
         }
     }
 
+    const handleBack = () => {
+        navigate(-1);
+    };
+
     return (
         <section className="single-recipe">
             {recipe && (
                 <article className="single-recipe__container">
                     <div className="single-recipe__navbar">
-                        <Link to="/search-results">
-                            <button className="single-recipe__navbar-button">
-                                <BackIcon className="single-recipe__navbar-icon" />
-                            </button>
-                        </Link>
+                        <button
+                            className="single-recipe__navbar-button"
+                            onClick={handleBack}>
+                            <BackIcon className="single-recipe__navbar-icon" />
+                        </button>
                         <article className="single-recipe__navbar-button-container">
                             <Link to="/">
                                 <button className="single-recipe__navbar-button">
@@ -89,7 +94,7 @@ export default function SingleRecipeSearchPage() {
                                 className={`single-recipe__header-button ${recipeSaved ? "single-recipe__header-button--active" : ""}`}
                                 onClick={handleSave}>
                                 <BookmarkIcon
-                                    className={`single-recipe__icon-save ${recipeSaved ? "single-recipe__icon-save--active" : ""}`}/>
+                                    className={`single-recipe__icon-save ${recipeSaved ? "single-recipe__icon-save--active" : ""}`} />
                             </button>
                         </div>
                         <div className="single-recipe__ingredients-container">

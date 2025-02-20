@@ -123,8 +123,10 @@ export default function EditRecipePage() {
   return (
     <section className="edit-recipe">
       <article className="edit-recipe__header">
-        <Link to="/cookbook" className="edit-recipe__button">
-          <BackIcon className="edit-recipe__icon" />
+        <Link to= {redirectRoute}>
+          <button className="edit-recipe__button">
+            <BackIcon className="edit-recipe__icon" />
+          </button>
         </Link>
         <h2>Edit recipe</h2>
       </article>

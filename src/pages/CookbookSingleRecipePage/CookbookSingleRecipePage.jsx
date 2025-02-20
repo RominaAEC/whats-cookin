@@ -13,9 +13,11 @@ import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 
 export default function CookbookSingleRecipePage() {
-  
     const [recipe, setRecipe] = useState(null); // Store single recipe data
     const { recipeId } = useParams();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const navigate = useNavigate();
 
     const getRecipeById = async (id) => {
         try {
@@ -33,62 +35,70 @@ export default function CookbookSingleRecipePage() {
         }
     }, [recipeId]);
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const navigate = useNavigate();
-  
     const openModal = (item) => {
-      setSelectedItem(item);
-      setIsModalOpen(true);
+        setSelectedItem(item);
+        setIsModalOpen(true);
     };
-  
+
     const closeModal = () => {
-      setSelectedItem(null);
-      setIsModalOpen(false);
+        setSelectedItem(null);
+        setIsModalOpen(false);
     };
 
     const deleteRecipe = () => {
-      if (selectedItem){
-        axios
-        .delete(`http://localhost:8080/recipes/${selectedItem}`)
-        .then(() => {
-            navigate("/cookbook");
-        })
-        .catch((error) =>{
-            console.error("Error deleting item:", error);
-            // alert("Failed to delete item.");
-        })
-      }
+        if (selectedItem) {
+            axios
+                .delete(`http://localhost:8080/recipes/${selectedItem}`)
+                .then(() => {
+                    navigate("/cookbook");
+                })
+                .catch((error) => {
+                    console.error("Error deleting item:", error);
+                    // alert("Failed to delete item.");
+                })
+        }
     };
 
     useEffect(() => {
-      if (isModalOpen) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "";
-      }
-  
-      return () => {
-        document.body.style.overflow = "";
-      };
+        if (isModalOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+        };
     }, [isModalOpen]);
+
+    const handleBack = () => {
+        const previousPage = sessionStorage.getItem("previousPage");
+    
+        if (previousPage && previousPage.includes(`/cookbook/${recipeId}/edit`)) {
+            navigate("/cookbook"); // If coming from edit, go to cookbook
+        } else if (previousPage) {
+            navigate(previousPage); // Go back to stored previous page
+        } else {
+            navigate(-1); // Default back behavior
+        }
+    };
 
     return (
         <section className="single-recipe">
-          <DeleteModal
-              modalTag={selectedItem ? recipe.name : ""}
-              isOpen={isModalOpen}
-              onClose={closeModal}
-              onAction={deleteRecipe}
+            <DeleteModal
+                modalTag={selectedItem ? recipe.name : ""}
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                onAction={deleteRecipe}
             />
             {recipe && (
                 <article className="single-recipe__container">
                     <div className="single-recipe__navbar">
-                        <Link to="/cookbook">
-                            <button className="single-recipe__navbar-button">
-                                <BackIcon className="single-recipe__navbar-icon" />
-                            </button>
-                        </Link>
+                        <button
+                            className="single-recipe__navbar-button"
+                            onClick={handleBack}>
+                            <BackIcon className="single-recipe__navbar-icon" />
+                        </button>
                         <article className="single-recipe__navbar-button-container">
                             <Link to="/">
                                 <button className="single-recipe__navbar-button">
@@ -113,16 +123,16 @@ export default function CookbookSingleRecipePage() {
                             </div>
                             <div className="single-recipe__button-container">
                                 <button onClick={() => openModal(recipe.id)} className="single-recipe__cookbook-button single-recipe__cookbook-button--delete">
-                                  <DeleteIcon className="single-recipe__header-icon single-recipe__header-icon--delete" />
+                                    <DeleteIcon className="single-recipe__header-icon single-recipe__header-icon--delete" />
                                 </button>
-                                <Link to= {`/cookbook/${recipe.id}/edit`}>
-                                  <button className="single-recipe__cookbook-button single-recipe__cookbook-button--edit">
-                                    <EditIcon className="single-recipe__header-icon single-recipe__header-icon--edit" />
-                                  </button>
+                                <Link to={`/cookbook/${recipe.id}/edit`}>
+                                    <button className="single-recipe__cookbook-button single-recipe__cookbook-button--edit">
+                                        <EditIcon className="single-recipe__header-icon single-recipe__header-icon--edit" />
+                                    </button>
                                 </Link>
-                                
+
                             </div>
-                            
+
                         </div>
                         <div className="single-recipe__ingredients-container">
                             <div className="single-recipe__ingredients">
