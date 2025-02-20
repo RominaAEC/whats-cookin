@@ -4,10 +4,15 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchRecipeCard from "../../components/SearchRecipeCard/SearchRecipeCard";
 import ErrorIcon from "../../assets/icons/error.svg?react";
+import BowlIcon from "../../assets/icons/arcticons_recipe-keeper.svg?react";
 
 export default function RecipeSearchPage() {
   const [recipes, setRecipes] = useState([]); // State to store recipes data
   const [searchQuery, setSearchQuery] = useState("");
+  const [noRecipesFound, setNoRecipesFound] = useState(false);
+  const [searchState, setSearchState] = useState("default"); // input field state 
+  const [error, setError] = useState(""); // input field error state
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -21,6 +26,7 @@ export default function RecipeSearchPage() {
       getRecipes(query);
     } else {
       setRecipes([]); // Clear recipes if there is no search query
+      setNoRecipesFound(false); // Reset no recipes found state
     }
 
   }, [location.search]);
@@ -61,6 +67,14 @@ export default function RecipeSearchPage() {
         return ingredientCount >= 1;
 
       });
+
+      // Check if no recipes matched the search
+      if (filteredRecipes.length === 0) {
+        setNoRecipesFound(true); // Set no recipes found state
+      } else {
+        setNoRecipesFound(false); // Reset no recipes found state
+      }
+
       setRecipes(filteredRecipes);
     } catch (error) {
       console.error("Error fetching recipes", error);
@@ -68,9 +82,6 @@ export default function RecipeSearchPage() {
   }
 
   // Search form logic and functionality
-  const [searchState, setSearchState] = useState("default");
-  const [error, setError] = useState("");
-
   const handleFocus = (e) => {
     setSearchState("active");
     setError("");
@@ -87,6 +98,7 @@ export default function RecipeSearchPage() {
       navigate(`/search-results?q=${encodeURIComponent(searchQuery)}`);
     } else {
       setRecipes([]); // Clear recipes if the search query is empty
+      setNoRecipesFound(false);
     }
 
     if (!searchQuery.trim()) {
@@ -123,7 +135,13 @@ export default function RecipeSearchPage() {
           Find me a recipe
         </button>
       </form>
-      <SearchRecipeCard recipes={recipes}/>
+      {noRecipesFound && (
+        <div className="recipe-search__no-results">
+          <BowlIcon className="recipe-search__no-results-icon" />
+          <h3 className="recipe-search__no-results-message">No recipes found. Please try different ingredients.</h3>
+        </div>
+      )}
+      <SearchRecipeCard recipes={recipes} />
     </section>
   )
 }
