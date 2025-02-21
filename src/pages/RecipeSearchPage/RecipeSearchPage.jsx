@@ -135,7 +135,7 @@ export default function RecipeSearchPage() {
           Find me a recipe
         </button>
       </form>
-      {noRecipesFound || error && (
+      {(noRecipesFound || error) && (
         <div className="recipe-search__no-results">
           <BowlIcon className="recipe-search__no-results-icon" />
           <h3 className="recipe-search__no-results-message">No recipes found. Please try different ingredients.</h3>

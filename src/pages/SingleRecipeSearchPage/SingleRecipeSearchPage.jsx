@@ -43,7 +43,8 @@ export default function SingleRecipeSearchPage() {
                 cookTimeMinutes: recipe.cookTimeMinutes,
                 servings: recipe.servings,
                 image: recipe.image
-            });
+            }, 
+            { headers: { "Content-Type": "application/json" } });
 
             if (response.status === 201) {
                 // console.log("Recipe bookmarked successfully:", response.data);
