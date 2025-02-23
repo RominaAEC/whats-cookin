@@ -35,13 +35,14 @@ export default function SingleRecipeSearchPage() {
         if (!recipe || recipeSaved) return; // Ensure there's a recipe to save
 
         try {
+           
             const response = await axios.post("http://localhost:8080/recipes", {
                 name: recipe.name,
                 ingredients: recipe.ingredients,
                 instructions: recipe.instructions,
-                prepTimeMinutes: recipe.prepTimeMinutes,
-                cookTimeMinutes: recipe.cookTimeMinutes,
-                servings: recipe.servings,
+                prepTimeMinutes: recipe.prepTimeMinutes ?? 0,
+                cookTimeMinutes: recipe.cookTimeMinutes ?? 0,
+                servings: recipe.servings ?? 1,
                 image: recipe.image
             }, 
             { headers: { "Content-Type": "application/json" } });
