@@ -10,6 +10,9 @@ export default function NavBar() {
     const location = useLocation();
     const pathname = location.pathname;
 
+    const isSearchActive = pathname === "/" || pathname.startsWith("/search-results");
+    const isCookbookActive = pathname.startsWith("/cookbook");
+
     // State to keep track of window width
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -43,13 +46,13 @@ export default function NavBar() {
 
             <article className="navbar__button-container">
                 <Link to="/">
-                    <button className="navbar__button">
+                    <button className={`navbar__button ${isSearchActive ? "navbar__button--active" : ""}`}>
                         <SearchIcon className="navbar__button-icon" />
                         <span className="navbar__button-label">Recipe finder</span>
                     </button>
                 </Link>
                 <Link to="/cookbook">
-                    <button className="navbar__button">
+                    <button className={`navbar__button ${isCookbookActive ? "navbar__button--active" : ""}`}>
                         <BookIcon className="navbar__button-icon" />
                         <span className="navbar__button-label">My cookbook</span>
                     </button>

@@ -49,4 +49,11 @@
         width: 6.5rem;
         height: 6.5rem;
     }
+
+    &__loading-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 18.75rem;
+    }
 }

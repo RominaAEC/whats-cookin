@@ -25,25 +25,51 @@ export default function SingleRecipeSearchPage() {
         }
     };
 
+    const checkIfRecipeIsSaved = async (recipe) => {
+        try {
+            // Fetch all saved recipes from the backend
+            const response = await axios.get("http://localhost:8080/recipes");
+            const savedRecipes = response.data;
+
+            // Check if the exact recipe is saved
+            const isSaved = savedRecipes.some(
+                (savedRecipe) =>
+                    savedRecipe.name === recipe.name
+            );
+
+            setRecipeSaved(isSaved); // Update the state based on whether the recipe is saved
+        } catch (error) {
+            console.error("Error checking if recipe is saved:", error);
+        }
+    };
+
     useEffect(() => {
         if (recipeId !== undefined) {
             getRecipeById(recipeId);
         }
     }, [recipeId]);
 
+    useEffect(() => {
+        if (recipe) {
+            checkIfRecipeIsSaved(recipe); // Check if the recipe is already bookmarked
+        }
+    }, [recipe]);
+
     const handleSave = async () => {
         if (!recipe || recipeSaved) return; // Ensure there's a recipe to save
 
         try {
+           
             const response = await axios.post("http://localhost:8080/recipes", {
                 name: recipe.name,
                 ingredients: recipe.ingredients,
                 instructions: recipe.instructions,
-                prepTimeMinutes: recipe.prepTimeMinutes,
-                cookTimeMinutes: recipe.cookTimeMinutes,
-                servings: recipe.servings,
+                prepTimeMinutes: recipe.prepTimeMinutes ?? 0,
+                cookTimeMinutes: recipe.cookTimeMinutes ?? 0,
+                servings: recipe.servings ?? 1,
                 image: recipe.image
-            });
+            }, 
+            { headers: { "Content-Type": "application/json" } });
 
             if (response.status === 201) {
                 // console.log("Recipe bookmarked successfully:", response.data);
