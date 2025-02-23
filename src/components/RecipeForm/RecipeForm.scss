@@ -1,0 +1,131 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.recipe-form{
+    margin-top: 1.5rem;
+
+    &__wrapper{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.5rem;
+    }
+
+    &__label{
+        font-size: 1rem;
+        line-height: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    &__input{
+        height: $elementHeight-mobile;
+        border-radius: 1.25rem;
+        padding: 0 1rem;
+        border: 1px solid $gray-evergreen;
+        margin-bottom: 0.5rem;
+        width:100%;
+        outline: none;
+
+        &--active{
+            border: 1px solid $evergreen;
+        }
+
+        &--error{
+            border: 1px solid $red;
+        }
+    }
+
+    &__error-container{
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    &__error-message{
+        color: $red;
+    }
+
+    &__input-group{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__input-individual {
+        display: flex;
+        justify-content: space-between;
+        gap:1rem;
+    }
+
+    &__button-small{
+        border: none;
+        border-radius: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        background-color: $evergreen-opacity;
+        width: 2.25rem;
+        height:2.25rem;
+    }
+
+    &__icon{
+        width: 1.25rem;
+        height: 1.25rem;
+
+        &--error{
+            fill: $red;
+        }
+    }
+
+    &__button{
+        display: flex;
+        height: $elementHeight-mobile;
+        justify-content: center;
+        align-items: center;
+        border-radius: 1.25rem;
+        border:none;
+        background-color: transparent;
+
+        &--add{
+            gap:0.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            height: 1.5rem;
+            background-color: $evergreen-opacity;
+            padding:0rem 1rem;
+            color: $evergreen;
+            font-size: 0.75rem;
+        }
+
+        &--cancel{
+            border: 1px solid $gray-evergreen;
+            width:48%;
+            color: $evergreen;
+            background-color: $white;
+            flex-shrink: 0;
+
+            &:hover{
+                border-color: $evergreen;
+            }
+        }
+
+        &--submit{
+            background-color: $evergreen;
+            width:48%;
+            color: $white;
+            flex-shrink: 0;
+
+            &:hover{
+                background-color: $dark-evergreen;
+            }
+        }
+    }
+
+    &__action-buttons{
+        padding-top: 1rem;
+        border-top: 2px solid $gray-evergreen;
+        display: flex;
+        gap:1rem;
+    }
+}

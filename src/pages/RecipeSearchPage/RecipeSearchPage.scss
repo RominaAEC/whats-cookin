@@ -1,0 +1,59 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.recipe-search {
+  margin: 0 $margin-mobile 1.5rem $margin-mobile;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+    border-radius: 1.25rem;
+    height: $elementHeight-mobile;
+    padding: 0 1rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid $gray-evergreen;
+    outline: none; // Reset outline
+
+    &--active {
+      border-color: $evergreen;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    border-radius: 1.25rem;
+    height: $elementHeight-mobile;
+    border: none;
+    background-color: $evergreen;
+    color: $white;
+
+    &:hover {
+      background-color: $dark-evergreen;
+      cursor: pointer;
+    }
+  }
+
+  &__no-results {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $evergreen;
+  }
+
+  &__no-results-icon{
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+  &__no-results-message{
+    text-align: center;
+  }
+}

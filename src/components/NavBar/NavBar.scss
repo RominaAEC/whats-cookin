@@ -1,0 +1,90 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem $margin-mobile;
+
+    @include tablet{
+        margin: $margin-tablet;
+    }
+
+    &__logo-container{
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo{
+        width: 81px;
+
+        @include tablet{
+            width:123px;
+        }
+    }
+
+    &__button-container{
+        display: flex;
+        gap: 0.5rem;
+
+        @include tablet{
+            gap: 1rem;
+        }
+    }
+
+    &__button{
+        width: 2.25rem;
+        height: $elementHeight-mobile;
+        border-radius: 2rem;
+        border: none;
+        background-color: $evergreen;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include tablet{
+            width: 10.375rem;
+            height: $elementHeight-tablet;
+            background-color: transparent;
+            gap: 0.5rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+
+            &--active{
+                border-bottom: 2px solid $evergreen;
+            }
+
+            &:hover{
+                background-color: $evergreen-opacity;
+            }
+        }
+    }
+
+    &__button-icon{
+        fill: $background;
+        width: 1.25rem;
+        height: 1.25rem;
+
+        @include tablet {
+            fill: $evergreen;
+            width:1.5rem;
+            height:1.5rem;
+        }
+    }
+
+    &__button-label{
+        display:none;
+
+        @include tablet{
+            display: contents;
+            color: $evergreen;
+        }
+    }
+
+    @media (max-width: 768px) {
+        &.navbar--hide {
+          display: none;
+        }
+      }
+}
+

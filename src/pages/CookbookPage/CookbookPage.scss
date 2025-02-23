@@ -1,0 +1,59 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.cookbook{
+    margin: 0 $margin-mobile 1.5rem $margin-mobile;
+
+    &__header{
+        display: flex;
+        gap:0.5rem;
+        align-items: center;
+        padding-bottom: 1rem;
+    }
+
+    &__header-icon{
+        width: 2.25rem;
+        height: 2.25rem;
+        fill: $black;
+    }
+
+    &__button{
+        display: flex;
+        gap:0.5rem;
+        align-items: center;
+        height: $elementHeight-mobile;
+        width:100%;
+        border-radius: 1.25rem;
+        justify-content: center;
+        border: none;
+        background-color: $evergreen;
+        color: $white;
+        margin-top: 0.5rem;
+    }
+
+    &__button-icon{
+        fill: $white;
+    }
+
+    &__error-container{
+        width:100%;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $evergreen;
+    }
+
+    &__error-icon{
+        width: 6.5rem;
+        height: 6.5rem;
+    }
+
+    &__loading-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 18.75rem;
+    }
+}
