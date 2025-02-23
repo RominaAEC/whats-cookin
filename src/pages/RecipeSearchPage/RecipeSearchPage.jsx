@@ -38,15 +38,28 @@ export default function RecipeSearchPage() {
         axios.get('http://localhost:8080/recipes')
       ]);
 
+      // Combine recipes from both sources
       const combinedRecipes = [
         ...source1.data.recipes.map(recipe => ({ ...recipe, source: "/search-results" })), // add source to determine basePath
         ...source2.data.map(recipe => ({ ...recipe, source: "/cookbook" }))
       ];
 
+      // Deduplicate recipes by name, giving priority to the backend recipe
+      const uniqueRecipesMap = new Map();
+      combinedRecipes.forEach((recipe) => {
+        const recipeName = recipe.name.toLowerCase();
+        if (!uniqueRecipesMap.has(recipeName) || recipe.source === "/cookbook") {
+          uniqueRecipesMap.set(recipeName, recipe);
+        }
+      });
+
+      // Convert the Map back to an array
+      const uniqueRecipes = Array.from(uniqueRecipesMap.values());
+
       // Filtering search results 
       const searchIngredients = query.toLowerCase().split(",").map((ingredient) => ingredient.trim());
 
-      const filteredRecipes = combinedRecipes.filter(recipe => {
+      const filteredRecipes = uniqueRecipes.filter(recipe => {
 
         let ingredientCount = 0;
 
