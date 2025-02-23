@@ -25,11 +25,35 @@ export default function SingleRecipeSearchPage() {
         }
     };
 
+    const checkIfRecipeIsSaved = async (recipe) => {
+        try {
+            // Fetch all saved recipes from the backend
+            const response = await axios.get("http://localhost:8080/recipes");
+            const savedRecipes = response.data;
+
+            // Check if the exact recipe is saved
+            const isSaved = savedRecipes.some(
+                (savedRecipe) =>
+                    savedRecipe.name === recipe.name
+            );
+
+            setRecipeSaved(isSaved); // Update the state based on whether the recipe is saved
+        } catch (error) {
+            console.error("Error checking if recipe is saved:", error);
+        }
+    };
+
     useEffect(() => {
         if (recipeId !== undefined) {
             getRecipeById(recipeId);
         }
     }, [recipeId]);
+
+    useEffect(() => {
+        if (recipe) {
+            checkIfRecipeIsSaved(recipe); // Check if the recipe is already bookmarked
+        }
+    }, [recipe]);
 
     const handleSave = async () => {
         if (!recipe || recipeSaved) return; // Ensure there's a recipe to save
