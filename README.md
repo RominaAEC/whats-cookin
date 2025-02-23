@@ -57,6 +57,8 @@ As a user, I want to be able to edit or delete recipes from my personal cookbook
     - react-router
     - react-modal
     - axios
+    - react-spinners
+    - vite-plugin-svgr
 - Server libraries:
     - express
 
@@ -217,6 +219,7 @@ Parameters:
 
 ## Future Implementations
 
+- Tablet and Desktop view
 - User Authentication: Ability to create accounts, log in, and save recipes across devices.
 - Filter recipes according to meal type (dinner, lunch, breakfast) and diet (vegan, vegetarian, etc.)
 - Add list and grid view preferences. 
