@@ -8,7 +8,10 @@
     margin: 1.5rem $margin-mobile;
 
     @include tablet{
-        margin: $margin-tablet;
+        width: $pageWidth-tablet;
+        margin: auto;
+        margin-bottom: $margin-tablet;
+        margin-top: $margin-tablet;
     }
 
     &__logo-container{

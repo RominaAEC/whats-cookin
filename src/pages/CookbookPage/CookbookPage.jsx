@@ -72,10 +72,18 @@ export default function CookbookPage() {
   }
   return (
     <section className="cookbook">
-      <article className="cookbook__header">
-        <BookIcon className="cookbook__header-icon" />
-        <h2 className="cookbook__header-title"> My Cookbook</h2>
-      </article >
+      <div className="cookbook__header-container"> 
+        <article className="cookbook__header">
+          <BookIcon className="cookbook__header-icon" />
+          <h2 className="cookbook__header-title"> My Cookbook</h2>
+        </article >
+        <Link to="/cookbook/add-recipe" className="cookbook__header-button">
+          <button className="cookbook__button  cookbook__button--hidden">
+            <AddIcon className="cookbook__button-icon" />
+            Add recipe
+          </button>
+        </Link>
+      </div>
       <form className="recipe-search__form">
         <input
           type="text"
@@ -89,7 +97,7 @@ export default function CookbookPage() {
         />
       </form>
       <Link to="/cookbook/add-recipe">
-        <button className="cookbook__button">
+        <button className="cookbook__button cookbook__button--active">
           <AddIcon className="cookbook__button-icon" />
           Add recipe
         </button>

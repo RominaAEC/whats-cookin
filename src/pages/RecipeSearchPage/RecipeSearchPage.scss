@@ -4,13 +4,29 @@
 .recipe-search {
   margin: 0 $margin-mobile 1.5rem $margin-mobile;
 
+  @include tablet{
+    width: $pageWidth-tablet;
+    margin: auto;
+    margin-bottom: $margin-tablet;
+  }
+
   &__form {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     width: 100%;
+
+    @include tablet{
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
+  &__input-container{
+    @include tablet{
+      width:75%;
+    }
+  }
   &__input {
     width: 100%;
     border-radius: 1.25rem;
@@ -22,6 +38,10 @@
 
     &--active {
       border-color: $evergreen;
+    }
+
+    @include tablet{
+      height: $elementHeight-tablet;
     }
   }
 
@@ -36,6 +56,11 @@
     &:hover {
       background-color: $dark-evergreen;
       cursor: pointer;
+    }
+
+    @include tablet{ 
+      width:12.5rem;
+      height: $elementHeight-tablet;
     }
   }
 
@@ -53,6 +78,7 @@
     width: 6.5rem;
     height: 6.5rem;
   }
+
   &__no-results-message{
     text-align: center;
   }

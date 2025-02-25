@@ -14,12 +14,23 @@
     align-items: center;
     z-index: 1000;
 
+    @include tablet{ 
+        width: 37rem;
+        height: 16rem;
+        padding: 2rem;
+        border-radius: 1.5rem;
+    }
+
 
     &__container{
         height: 90%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        @include tablet{
+            height: 80%;
+        }
     }
 
     &__button-icon{
@@ -32,6 +43,14 @@
         position: absolute;
         right: 1rem;
         top:1rem;
+        border-radius: 1.5rem;
+        width: $elementHeight-tablet;
+        height: $elementHeight-tablet;
+
+        &:hover{
+            background-color: $evergreen-opacity;
+        }
+
     }
 
     &__button-container{
@@ -50,6 +69,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        @include tablet{
+            height: $elementHeight-tablet;
+        }
 
 
         &--secondary{
@@ -78,6 +101,10 @@
     &__text{
         width:100%;
         padding-bottom: 1.25rem;
+
+        @include tablet{
+            text-align: center;
+        }
     }
 
 

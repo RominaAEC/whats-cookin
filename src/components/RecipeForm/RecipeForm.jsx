@@ -58,94 +58,95 @@ export default function AddRecipe({ onSubmit, formData, setFormData, onCancel, f
 
     return (
         <form onSubmit={onSubmit} className="recipe-form">
-
-            {/* Recipe name field */}
-
-            <div className="recipe-form__wrapper">
-                <label className="recipe-form__label">Recipe Name</label>
-                <input
-                    type="text"
-                    placeholder="Recipe name"
-                    value={formData.name}
-                    onChange={(e) => handleChange("name", e.target.value)}
-                    className=
-                    {`recipe-form__input 
+            <div className="recipe-form__block">
+                <div className="recipe-form__container">
+                    {/* Recipe name field */}
+                    <div className="recipe-form__wrapper">
+                        <label className="recipe-form__label">Recipe Name</label>
+                        <input
+                            type="text"
+                            placeholder="Recipe name"
+                            value={formData.name}
+                            onChange={(e) => handleChange("name", e.target.value)}
+                            className=
+                            {`recipe-form__input 
                         ${focusedInput === "name" ? "recipe-form__input--active" : ""} 
                         ${validation.name ? "recipe-form__input--error" : ""}`}
-                    onFocus={() => handleFocus("name")}
-                    onBlur={handleBlur}
-                />
-                {validation.name && <div className="recipe-form__error-container">
-                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
-                    <p className="recipe-form__error-message">{validation.name}</p>
-                </div>}
-            </div>
+                            onFocus={() => handleFocus("name")}
+                            onBlur={handleBlur}
+                        />
+                        {validation.name && <div className="recipe-form__error-container">
+                            <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
+                            <p className="recipe-form__error-message">{validation.name}</p>
+                        </div>}
+                    </div>
 
-            {/* Prep Time field */}
-
-            <div className="recipe-form__wrapper">
-                <label className="recipe-form__label">Prep Time</label>
-                <input
-                    type="text"
-                    placeholder="E.g. 15 min"
-                    value={formData.prepTimeMinutes}
-                    onChange={(e) => handleChange("prepTimeMinutes", e.target.value)}
-                    className=
-                    {`recipe-form__input 
-                        ${focusedInput === "prepTimeMinutes" ? "recipe-form__input--active" : ""} 
-                        ${validation.prepTimeMinutes ? "recipe-form__input--error" : ""}`}
-                    onFocus={() => handleFocus("prepTimeMinutes")}
-                    onBlur={handleBlur}
-                />
-                {validation.prepTimeMinutes && <div className="recipe-form__error-container">
-                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
-                    <p className="recipe-form__error-message">{validation.prepTimeMinutes}</p>
-                </div>}
-            </div>
-
-            {/* Cook Time field */}
-
-            <div className="recipe-form__wrapper">
-                <label className="recipe-form__label">Cook Time</label>
-                <input
-                    type="text"
-                    placeholder="E.g. 20 min"
-                    value={formData.cookTimeMinutes}
-                    onChange={(e) => handleChange("cookTimeMinutes", e.target.value)}
-                    className=
-                    {`recipe-form__input 
-                        ${focusedInput === "cookTimeMinutes" ? "recipe-form__input--active" : ""}
-                        ${validation.cookTimeMinutes ? "recipe-form__input--error" : ""}`}
-                    onFocus={() => handleFocus("cookTimeMinutes")}
-                    onBlur={handleBlur}
-                />
-                {validation.cookTimeMinutes && <div className="recipe-form__error-container">
-                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
-                    <p className="recipe-form__error-message">{validation.cookTimeMinutes}</p>
-                </div>}
-            </div>
-
-            {/* Servings field */}
-
-            <div className="recipe-form__wrapper">
-                <label className="recipe-form__label">Servings</label>
-                <input
-                    type="text"
-                    placeholder="E.g. 2"
-                    value={formData.servings}
-                    onChange={(e) => handleChange("servings", e.target.value)}
-                    className=
-                    {`recipe-form__input 
+                    {/* Servings field */}
+                    <div className="recipe-form__wrapper">
+                        <label className="recipe-form__label">Servings</label>
+                        <input
+                            type="text"
+                            placeholder="E.g. 2"
+                            value={formData.servings}
+                            onChange={(e) => handleChange("servings", e.target.value)}
+                            className=
+                            {`recipe-form__input 
                         ${focusedInput === "servings" ? "recipe-form__input--active" : ""}
                         ${validation.servings ? "recipe-form__input--error" : ""}`}
-                    onFocus={() => handleFocus("servings")}
-                    onBlur={handleBlur}
-                />
-                {validation.servings && <div className="recipe-form__error-container">
-                    <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
-                    <p className="recipe-form__error-message">{validation.servings}</p>
-                </div>}
+                            onFocus={() => handleFocus("servings")}
+                            onBlur={handleBlur}
+                        />
+                        {validation.servings && <div className="recipe-form__error-container">
+                            <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
+                            <p className="recipe-form__error-message">{validation.servings}</p>
+                        </div>}
+                    </div>
+                </div>
+                <div className="recipe-form__container">
+                    {/* Prep Time field */}
+                    <div className="recipe-form__wrapper">
+                        <label className="recipe-form__label">Prep Time</label>
+                        <input
+                            type="text"
+                            placeholder="E.g. 15 min"
+                            value={formData.prepTimeMinutes}
+                            onChange={(e) => handleChange("prepTimeMinutes", e.target.value)}
+                            className=
+                            {`recipe-form__input 
+                        ${focusedInput === "prepTimeMinutes" ? "recipe-form__input--active" : ""} 
+                        ${validation.prepTimeMinutes ? "recipe-form__input--error" : ""}`}
+                            onFocus={() => handleFocus("prepTimeMinutes")}
+                            onBlur={handleBlur}
+                        />
+                        {validation.prepTimeMinutes && <div className="recipe-form__error-container">
+                            <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
+                            <p className="recipe-form__error-message">{validation.prepTimeMinutes}</p>
+                        </div>}
+                    </div>
+
+                    {/* Cook Time field */}
+                    <div className="recipe-form__wrapper">
+                        <label className="recipe-form__label">Cook Time</label>
+                        <input
+                            type="text"
+                            placeholder="E.g. 20 min"
+                            value={formData.cookTimeMinutes}
+                            onChange={(e) => handleChange("cookTimeMinutes", e.target.value)}
+                            className=
+                            {`recipe-form__input 
+                        ${focusedInput === "cookTimeMinutes" ? "recipe-form__input--active" : ""}
+                        ${validation.cookTimeMinutes ? "recipe-form__input--error" : ""}`}
+                            onFocus={() => handleFocus("cookTimeMinutes")}
+                            onBlur={handleBlur}
+                        />
+                        {validation.cookTimeMinutes && <div className="recipe-form__error-container">
+                            <ErrorIcon className="recipe-form__icon recipe-form__icon--error" />
+                            <p className="recipe-form__error-message">{validation.cookTimeMinutes}</p>
+                        </div>}
+                    </div>
+                </div>
             </div>
+
 
             {/* Ingredients fields */}
 
