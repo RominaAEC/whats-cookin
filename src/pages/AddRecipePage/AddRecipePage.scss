@@ -10,6 +10,10 @@
         margin-bottom: $margin-tablet;
     }
 
+    @include desktop{
+        width:$pageWidth-desktop;
+    }
+
     &__header{
         display: flex;
         gap: 0.5rem;

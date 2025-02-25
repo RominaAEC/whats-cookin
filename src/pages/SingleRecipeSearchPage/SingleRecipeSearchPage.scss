@@ -10,6 +10,10 @@
     margin-bottom: $margin-tablet;
   }
 
+  @include desktop{
+    width:$pageWidth-desktop;
+  }
+
   &__navbar {
     width: 100%;
     position: absolute;
@@ -145,6 +149,9 @@
 
     &--active {
       background-color: $evergreen;
+      // &:hover{
+      //   background-color: $gray-evergreen;
+      // }
     }
 
     @include tablet {

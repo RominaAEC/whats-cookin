@@ -10,6 +10,10 @@
     margin-bottom: $margin-tablet;
   }
 
+  @include desktop{
+    width:$pageWidth-desktop;
+  }
+
   &__navbar {
     width: 100%;
     position: absolute;
@@ -41,6 +45,10 @@
     border-radius: 2rem;
     justify-content: center;
     align-items: center;
+
+    &:hover{
+      background-color: $gray-evergreen;
+    }
 
     @include tablet {
       width: $elementHeight-tablet;
@@ -153,10 +161,18 @@
 
     &--delete {
       background-color: $red-opacity;
+
+      &:hover{
+        background-color: #df535371;
+      }
     }
 
     &--edit {
       background-color: $evergreen-opacity;
+
+      &:hover{
+        background-color: $gray-evergreen;
+      }
     }
 
     @include tablet {

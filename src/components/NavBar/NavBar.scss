@@ -14,6 +14,10 @@
         margin-top: $margin-tablet;
     }
 
+    @include desktop{
+        width:$pageWidth-desktop;
+    }
+
     &__logo-container{
         display: flex;
         align-items: center;

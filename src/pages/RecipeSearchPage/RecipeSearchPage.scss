@@ -10,6 +10,10 @@
     margin-bottom: $margin-tablet;
   }
 
+  @include desktop{
+    width:$pageWidth-desktop;
+  }
+
   &__form {
     display: flex;
     flex-direction: column;

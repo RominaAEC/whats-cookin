@@ -10,10 +10,15 @@
         margin-bottom: $margin-tablet;
     }
 
+    @include desktop{
+        width:$pageWidth-desktop;
+    }
+
     &__header-container{
         @include tablet{
             display: flex;
             justify-content: space-between;
+            margin-bottom: 1rem;
         }
     }
 
@@ -56,6 +61,10 @@
         color: $white;
         margin-top: 0.5rem;
 
+        &:hover{
+            background-color: $dark-evergreen;
+        }
+
         @include tablet{
             height: $elementHeight-tablet;
         }
@@ -67,8 +76,12 @@
        }
 
         &--hidden{
-            width:30%;
+            width:25%;
             margin:0;
+
+            &:hover{
+                background-color: $dark-evergreen;
+            }
         }
     }
 
