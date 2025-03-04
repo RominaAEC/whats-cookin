@@ -4,6 +4,24 @@
 .cookbook{
     margin: 0 $margin-mobile 1.5rem $margin-mobile;
 
+    @include tablet{
+        width: $pageWidth-tablet;
+        margin: auto;
+        margin-bottom: $margin-tablet;
+    }
+
+    @include desktop{
+        width:$pageWidth-desktop;
+    }
+
+    &__header-container{
+        @include tablet{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+    }
+
     &__header{
         display: flex;
         gap:0.5rem;
@@ -11,10 +29,23 @@
         padding-bottom: 1rem;
     }
 
+    &__header-button{
+        display: none;
+
+        @include tablet{
+            display: contents;
+        }
+    }
+
     &__header-icon{
         width: 2.25rem;
         height: 2.25rem;
         fill: $black;
+
+        @include tablet{
+            width: $elementHeight-tablet;
+            height: $elementHeight-tablet;
+        }
     }
 
     &__button{
@@ -29,6 +60,29 @@
         background-color: $evergreen;
         color: $white;
         margin-top: 0.5rem;
+
+        &:hover{
+            background-color: $dark-evergreen;
+        }
+
+        @include tablet{
+            height: $elementHeight-tablet;
+        }
+
+       &--active{
+        @include tablet{
+            display: none;
+        }
+       }
+
+        &--hidden{
+            width:25%;
+            margin:0;
+
+            &:hover{
+                background-color: $dark-evergreen;
+            }
+        }
     }
 
     &__button-icon{

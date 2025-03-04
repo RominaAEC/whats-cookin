@@ -8,11 +8,24 @@
     justify-content: space-between;
     margin-top: 1.5rem;
 
+    @include tablet{
+        gap:1.5rem;
+        justify-content: flex-start;
+    }
+
     &__container{
         border-radius: 1rem;
         background-color: $white;
         box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
         width: 47%;
+
+        @include tablet{
+           width:31%;
+        }
+
+        @include desktop{
+            width:23%;
+        }
     }
     
     &__image{
@@ -21,16 +34,28 @@
         object-fit: cover;
         border-radius: 1rem 1rem 0 0;
         height: 6rem;
+
+        @include tablet{
+            height: 7rem;
+        }
     }
 
     &__wrapper{
         padding:0.625rem;
+
+        @include tablet{
+            padding: 1rem;
+        }
     }
 
     &__title{
         margin-bottom: 0.5rem;
         height: 2rem;
         color: $evergreen;
+
+        @include tablet{
+            height: 2.5rem;
+        }        
     }
 
     &__details{
@@ -40,5 +65,9 @@
 
     &__label{
         color: $evergreen;
+    }
+
+    &__content{
+        font-weight: 300;
     }
 }

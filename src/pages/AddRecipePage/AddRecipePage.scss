@@ -4,19 +4,43 @@
 .add-recipe{
     margin: 0 $margin-mobile 1.5rem $margin-mobile;
 
+    @include tablet{
+        width: $pageWidth-tablet;
+        margin: auto;
+        margin-bottom: $margin-tablet;
+    }
+
+    @include desktop{
+        width:$pageWidth-desktop;
+    }
+
     &__header{
         display: flex;
         gap: 0.5rem;
+        align-items: center;
     }
 
     &__button{
         display: flex;
         justify-content: center;
         align-items: center;
+        width: $elementHeight-mobile;
+        height: $elementHeight-mobile;
+        background-color: transparent;
+        border-radius: 1.25rem;
+
+        &:hover{
+            background-color: $evergreen-opacity;
+        }
     }
 
     &__icon{
         width:1.25rem;
         height:1.25rem;
+
+        @include tablet{
+            width:1.5rem;
+            height:1.5rem;
+        }
     }
 }

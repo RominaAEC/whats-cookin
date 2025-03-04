@@ -50,7 +50,7 @@ export default function CookbookSingleRecipePage() {
             axios
                 .delete(`http://localhost:8080/recipes/${selectedItem}`)
                 .then(() => {
-                    navigate(-1);
+                    navigate(`/cookbook`);
                 })
                 .catch((error) => {
                     console.error("Error deleting item:", error);
