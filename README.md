@@ -219,7 +219,6 @@ Parameters:
 
 ## Future Implementations
 
-- Tablet and Desktop view
 - User Authentication: Ability to create accounts, log in, and save recipes across devices.
 - Filter recipes according to meal type (dinner, lunch, breakfast) and diet (vegan, vegetarian, etc.)
 - Add list and grid view preferences. 
